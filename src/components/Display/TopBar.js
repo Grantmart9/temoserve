@@ -28,13 +28,13 @@ export const TopBar = ({ setTopBarOn }) => {
       <AppBar
         position="fixed"
         elevation={1}
-        className="bg-gradient-to-r from-green to-blue"
+        className="bg-gradient-to-r from-green to-purple"
       >
         {isResponsiveSize ? (
           <Toolbar disableGutters>
             <Container></Container>
             <SpeedDial
-              FabProps={{ size: "small" }}
+              FabProps={{ size: "small",color:"success" }}
               ariaLabel="SpeedDial Menu"
               icon={<MenuIcon style={{ color: "whitesmoke" }} />}
               transitionDuration={800}
@@ -55,12 +55,12 @@ export const TopBar = ({ setTopBarOn }) => {
           <Toolbar disableGutters>
             <Tooltip title="Menu"></Tooltip>
             <SpeedDial
-              FabProps={{ size: "medium", color: "default" }}
+              FabProps={{ size: "small" }}
               ariaLabel="SpeedDial Menu"
-              icon={<MenuIcon />}
+              icon={<MenuIcon style={{ color: "whitesmoke" }} />}
               transitionDuration={800}
-              direction="down"
-              sx={{ marginRight: "5pt", color: "white" }}
+              direction="right"
+              sx={{ marginLeft: "5pt" }}
             >
               {actions.map((action) => (
                 <SpeedDialAction
