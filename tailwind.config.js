@@ -3,15 +3,17 @@ module.exports = {
   content: ["./src/**/*.{html,js}"],
   theme: {
     colors: {
-      blue: "#1fb6ff",
+      blue: { light: "#1fb6ff", dark: "#114057" },
       purple: "#7e5bef",
       pink: "#ff49db",
-      orange: "#ff7849",
-      green: "#13ce66",
+      orange: [{ 200: "#ff7849", 100: "#fab8a2" }],
+      green: [{ 100: "#74cf9d", 200: "#13ce66" }],
       yellow: "#ffc82c",
       "gray-dark": "#273444",
       gray: "#8492a6",
       "gray-light": "#d3dce6",
+      transparent: "transparent",
+      black: "#0a0001",
     },
     fontFamily: {
       sans: ["'Sofia Sans', sans-serif"],
