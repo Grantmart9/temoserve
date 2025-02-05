@@ -3,6 +3,13 @@ import React from "react";
 import { animate, motion, useMotionValue, useTransform } from "motion/react"
 import { useEffect } from "react"
 import { Gauge } from '@mui/x-charts/Gauge';
+// Import react-circular-progressbar module and styles
+import {
+    CircularProgressbar,
+    CircularProgressbarWithChildren,
+    buildStyles
+} from "react-circular-progressbar";
+import "react-circular-progressbar/dist/styles.css";
 
 const text = {
     fontSize: 64,
@@ -23,8 +30,18 @@ const Loyalty = () => {
 
     return (
         <React.Fragment>
-            <div className="block align-center justify-center">
-                <Gauge width={100} height={100} value={200} startAngle={-90} endAngle={90} />
+            <div className="block align-center justify-center p-4">
+                <CircularProgressbarWithChildren
+                
+                    value={rounded}
+                    text={`${80}%`}
+                    strokeWidth={20}
+                    styles={buildStyles({
+                        strokeLinecap: "butt",
+                        strokeWidth:""
+                   
+                    })}
+                />
                 <motion.pre style={text}>{rounded}</motion.pre>
             </div>
         </React.Fragment>

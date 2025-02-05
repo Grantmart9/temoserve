@@ -21,6 +21,7 @@ import AccountBoxIcon from '@mui/icons-material/AccountBox';
 import HistoryIcon from '@mui/icons-material/History';
 import LoginIcon from '@mui/icons-material/Login';
 import Divider from '@mui/material/Divider';
+import LogoutIcon from '@mui/icons-material/Logout';
 import Image from "next/image";
 
 const MenuIconButton = ({ toggleDrawer }) => {
@@ -58,7 +59,8 @@ export default function RootLayout({ children }) {
   const SubMenuList = [
     { "name": 'Account', "path": "/account", "icon": <AccountBoxIcon /> },
     { "name": 'History', "path": "/history", "icon": <HistoryIcon /> },
-    { "name": 'Login/Logout', "path": "/login", "icon": <LoginIcon /> },]
+    { "name": 'Login', "path": "/login", "icon": <LoginIcon /> },
+    { "name": 'Logout', "path": "/logout", "icon": <LogoutIcon /> }]
 
   const DrawerList = (
     <Box sx={{ width: 220 }} className="bg-gradient-to-b from-blue-dark to-gray-dark h-screen" role="presentation" onClick={toggleDrawer(false)}>
@@ -93,7 +95,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" className="flex h-full items-center justify-center">
       <body
-        className={`${montserrat.className} h-full w-full bg-[url(/images/ad1.png)] bg-fixed`}
+        className={`${montserrat.className} h-full w-full bg-gradient-to-br from-gray-dark to-blue-dark bg-fixed`}
       >
         <div className="z-50 fixed mt-1 ml-1">
           <MenuIconButton toggleDrawer={toggleDrawer(true)} />
