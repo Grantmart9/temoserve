@@ -95,7 +95,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" className="flex h-full items-center justify-center">
       <body
-        className={`${montserrat.className} h-full w-full bg-gradient-to-br from-gray-dark to-blue-dark bg-fixed`}
+        className={`${montserrat.className} h-full w-full bg-gradient-to-br from-gray-medium to-gray-light bg-fixed`}
       >
         <div className="z-50 fixed mt-1 ml-1">
           <MenuIconButton toggleDrawer={toggleDrawer(true)} />

@@ -8,66 +8,40 @@ import Rating from '@mui/material/Rating';
 import Stack from '@mui/material/Stack';
 import Button from "@mui/material/Button";
 import { createClient } from "@supabase/supabase-js";
+import Image from 'next/image'
+import Background from "./ad1.png"
 
 const supabase = createClient("https://sdsejsyrecrffnjqevfm.supabase.co", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNkc2Vqc3lyZWNyZmZuanFldmZtIiwicm9sZSI6ImFub24iLCJpYXQiOjE2ODg4NTcxOTcsImV4cCI6MjAwNDQzMzE5N30.lQp4_X1_JxGAS3SlmFHgHs8TQs30F35ssfS-0oZOw-k");
 
 
-const NameList = [
-    { "name": "Name_1", "distance": "15 KM", "Rating": "Rating" },
-    { "name": "Name_1", "distance": "15 KM", "Rating": "Rating" },
-    { "name": "Name_1", "distance": "15 KM", "Rating": "Rating" },
-    { "name": "Name_1", "distance": "15 KM", "Rating": "Rating" },
-    { "name": "Name_1", "distance": "15 KM", "Rating": "Rating" },
-    { "name": "Name_1", "distance": "15 KM", "Rating": "Rating" },
-    { "name": "Name_1", "distance": "15 KM", "Rating": "Rating" },
-    { "name": "Name_1", "distance": "15 KM", "Rating": "Rating" },
-    { "name": "Name_1", "distance": "15 KM", "Rating": "Rating" },
-    { "name": "Name_1", "distance": "15 KM", "Rating": "Rating" },
-    { "name": "Name_1", "distance": "15 KM", "Rating": "Rating" },
-    { "name": "Name_1", "distance": "15 KM", "Rating": "Rating" },
-    { "name": "Name_1", "distance": "15 KM", "Rating": "Rating" },
-    { "name": "Name_1", "distance": "15 KM", "Rating": "Rating" },
-    { "name": "Name_1", "distance": "15 KM", "Rating": "Rating" },
-    { "name": "Name_1", "distance": "15 KM", "Rating": "Rating" },
-    { "name": "Name_1", "distance": "15 KM", "Rating": "Rating" },
-    { "name": "Name_1", "distance": "15 KM", "Rating": "Rating" },
-    { "name": "Name_1", "distance": "15 KM", "Rating": "Rating" },
-    { "name": "Name_1", "distance": "15 KM", "Rating": "Rating" },
-    { "name": "Name_1", "distance": "15 KM", "Rating": "Rating" },
-    { "name": "Name_1", "distance": "15 KM", "Rating": "Rating" },
-    { "name": "Name_1", "distance": "15 KM", "Rating": "Rating" },
-    { "name": "Name_1", "distance": "15 KM", "Rating": "Rating" },
-    { "name": "Name_1", "distance": "15 KM", "Rating": "Rating" },
-    { "name": "Name_1", "distance": "15 KM", "Rating": "Rating" },
-
-]
-
 const ServiceSearchBar = () => {
-    return (<div className="inline-flex mx-auto">
-        <motion.div initial={{ opacity: 0, y: 0 }} animate={{ opacity: 1, y: 20 }} transition={{
-            type: "spring",
-            bounce: 0.02,
-            stiffness: 200,
-            damping: 80,
-            mass: 10,
-            duration: 1,
-            delay: 0.5
-        }} className="rounded-md p-0.5 bg-gray-light">
-            <TextField size="small" fullWidth={true} className="rounded-md" />
-        </motion.div>
-        <motion.div initial={{ opacity: 0, y: 0 }} animate={{ opacity: 1, y: 20 }} transition={{
-            type: "spring",
-            bounce: 0.02,
-            stiffness: 200,
-            damping: 80,
-            mass: 10,
-            duration: 1,
-            delay: 0.5
-        }} className="rounded-full p-0.5 bg-gray-light ml-2">
-            <IconButton className="rounded-full mx-auto my-auto" sx={{ bgcolor: "teal", color: "whitesmoke" }} >
-                <SearchIcon fontSize="inherit" /></IconButton>
-        </motion.div>
-    </div>)
+    return (
+        <div className="inline-flex mx-auto">
+            <motion.div initial={{ opacity: 0, y: 0 }} animate={{ opacity: 1, y: 20 }} transition={{
+                type: "spring",
+                bounce: 0.02,
+                stiffness: 200,
+                damping: 80,
+                mass: 10,
+                duration: 1,
+                delay: 0.5
+            }} className="rounded-md p-0.5 bg-gray-light">
+                <TextField size="small" fullWidth={true} className="rounded-md" />
+            </motion.div>
+            <motion.div initial={{ opacity: 0, y: 0 }} animate={{ opacity: 1, y: 20 }} transition={{
+                type: "spring",
+                bounce: 0.02,
+                stiffness: 200,
+                damping: 80,
+                mass: 10,
+                duration: 1,
+                delay: 0.5
+            }} className="rounded-full p-0.5 bg-gray-light ml-2">
+                <IconButton className="rounded-full mx-auto my-auto" sx={{ bgcolor: "teal", color: "whitesmoke" }} >
+                    <SearchIcon fontSize="inherit" /></IconButton>
+            </motion.div>
+        </div>
+    )
 }
 
 
@@ -123,21 +97,16 @@ const Service = () => {
                             duration: 1,
                             delay: 1.5
                         }} className="grid lg:grid-cols-5 grid-flow-row gap-1 mt-20 mx-2">
-                            {Data.map((Name) => <div>
+                            {Data.map((Service) => <div>
                                 <Stack className="grid grid-flow-row gap-1 p-2 bg-blue-dark rounded-3xl bg-fixed bg-repeat">
-                                    <CardMedia
-                                        title="green iguana"
-                                    />
-                                    <div className="text-gray-light font-serif text-center justify-center opacity-100 font-bold">{Name.name}</div>
-                                    <div className="text-gray-light text-center justify-center font-bold">{Name.category}</div>
-                                    <div className="text-gray-light text-center justify-center font-bold">{Name.rating}</div>
+                                    <img alt="test" src={`data:image/jpeg;base64,${Service.person_logo}`} />
+                                    <div className="text-gray-light font-serif text-center justify-center opacity-100 font-bold">{Service.name}</div>
+                                    <div className="text-gray-light text-center justify-center font-bold">{Service.category}</div>
+                                    <div className="text-gray-light text-center justify-center font-bold">{Service.rating}</div>
                                     <div className="flex align-center justify-center mx-auto" >
                                         <Rating
                                             name="simple-controlled"
-                                            value={value}
-                                            onChange={(event, newValue) => {
-                                                setValue(newValue);
-                                            }}
+                                            value={Service.rating}
                                         />
                                     </div>
                                 </Stack>
