@@ -1,8 +1,8 @@
 {
-  "name": "acps",
-  "description": "Property development company",
+  "name": "temoserve",
+  "description": "Service provider app",
   "author": "Grant Marthinus",
-  "homepage": "http://acps.co.za",
+  "homepage": "http://temoserve.co.za",
   "version": "1.0.0",
   "private": true,
   "dependencies": {
