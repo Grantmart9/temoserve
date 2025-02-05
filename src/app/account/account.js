@@ -22,9 +22,8 @@ const Account = () => {
 
     return (
         <React.Fragment>
-            <div className="flex align-center justify-center">
-                <Gauge width={100} height={100} value={rounded} startAngle={-90} endAngle={90} />
-                <motion.pre style={text}>{rounded}</motion.pre>
+            <div className=" mt-20 m-4 text-center text-white justify-center">
+                This is the accounts page
             </div>
         </React.Fragment>
     );

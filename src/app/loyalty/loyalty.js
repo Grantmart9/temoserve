@@ -30,18 +30,7 @@ const Loyalty = () => {
 
     return (
         <React.Fragment>
-            <div className="block align-center justify-center p-4">
-                <CircularProgressbarWithChildren
-                
-                    value={rounded}
-                    text={`${80}%`}
-                    strokeWidth={20}
-                    styles={buildStyles({
-                        strokeLinecap: "butt",
-                        strokeWidth:""
-                   
-                    })}
-                />
+            <div className="mt-20 m-4 text-center text-white justify-center">
                 <motion.pre style={text}>{rounded}</motion.pre>
             </div>
         </React.Fragment>

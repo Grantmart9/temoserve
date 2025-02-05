@@ -38,7 +38,8 @@ const ServiceSearchBar = () => {
                 delay: 0.5
             }} className="rounded-full p-0.5 bg-gray-light ml-2">
                 <IconButton className="rounded-full mx-auto my-auto" sx={{ bgcolor: "teal", color: "whitesmoke" }} >
-                    <SearchIcon fontSize="inherit" /></IconButton>
+                    <SearchIcon fontSize="inherit" />
+                </IconButton>
             </motion.div>
         </div>
     )
@@ -47,7 +48,7 @@ const ServiceSearchBar = () => {
 
 const Service = () => {
     const [value, setValue] = React.useState(2);
-    const [SectionEnabled, setSectionEnabled] = useState(false);
+    const [SectionEnabled, setSectionEnabled] = useState(true);
     const [Data, setData] = useState([]);
 
     const handleSectionEnabled = () => {
@@ -86,33 +87,37 @@ const Service = () => {
                             Add a service
                         </Button>
                     </div>
-                    {SectionEnabled ? <><div >
-                        <ServiceSearchBar className="flex align-center justify-center" />
-                        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{
-                            type: "spring",
-                            bounce: 0.02,
-                            stiffness: 200,
-                            damping: 80,
-                            mass: 10,
-                            duration: 1,
-                            delay: 1.5
-                        }} className="grid lg:grid-cols-5 grid-flow-row gap-1 mt-20 mx-2">
-                            {Data.map((Service) => <div>
-                                <Stack className="grid grid-flow-row gap-1 p-2 bg-blue-dark rounded-3xl bg-fixed bg-repeat">
-                                    <img alt="test" src={`data:image/jpeg;base64,${Service.person_logo}`} />
-                                    <div className="text-gray-light font-serif text-center justify-center opacity-100 font-bold">{Service.name}</div>
-                                    <div className="text-gray-light text-center justify-center font-bold">{Service.category}</div>
-                                    <div className="text-gray-light text-center justify-center font-bold">{Service.rating}</div>
-                                    <div className="flex align-center justify-center mx-auto" >
-                                        <Rating
-                                            name="simple-controlled"
-                                            value={Service.rating}
-                                        />
-                                    </div>
-                                </Stack>
-                            </div>)}
-                        </motion.div>
-                    </div></> : null}
+                    {SectionEnabled ? <>
+                        <div>
+                            <div className="flex align-center justify-center">
+                                <ServiceSearchBar className="flex align-center justify-center" />
+                            </div>
+                            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{
+                                type: "spring",
+                                bounce: 0.02,
+                                stiffness: 200,
+                                damping: 80,
+                                mass: 10,
+                                duration: 1,
+                                delay: 1
+                            }} className="grid lg:grid-cols-5 grid-flow-row gap-1 mt-20 mx-2">
+                                {Data.map((Service) =>
+                                    <div>
+                                        <Stack className="grid grid-flow-row gap-1 p-2 bg-blue-dark rounded-3xl bg-fixed bg-repeat">
+                                            <img className="rounded-lg p-1" alt="test" src={`data:image/jpeg;base64,${Service.person_logo}`} />
+                                            <div className="text-gray-light font-serif text-center justify-center opacity-100 font-bold">Service: {Service.name}</div>
+                                            <div className="text-gray-light text-center justify-center font-bold">Category: {Service.category}</div>
+                                            <div className="text-gray-light text-center justify-center font-bold">Rating: {Service.rating}</div>
+                                            <div className="flex align-center justify-center mx-auto" >
+                                                <Rating
+                                                    name="simple-controlled"
+                                                    value={Service.rating}
+                                                />
+                                            </div>
+                                        </Stack>
+                                    </div>)}
+                            </motion.div>
+                        </div></> : <div>Add to service</div>}
                 </div>
             </div>
         </React.Fragment>

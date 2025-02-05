@@ -23,7 +23,7 @@ const Login = () => {
 
     return (
         <React.Fragment>
-            <div className="flex align-center justify-center">
+            <div className=" mt-20 m-4 text-center text-white justify-center">
                 Login Page
             </div>
         </React.Fragment>
