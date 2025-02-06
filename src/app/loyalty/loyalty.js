@@ -2,18 +2,12 @@
 import React from "react";
 import { animate, motion, useMotionValue, useTransform } from "motion/react"
 import { useEffect } from "react"
-import { Gauge } from '@mui/x-charts/Gauge';
-// Import react-circular-progressbar module and styles
-import {
-    CircularProgressbar,
-    CircularProgressbarWithChildren,
-    buildStyles
-} from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 
 const text = {
     fontSize: 64,
     color: "#4ff0b7",
+
 }
 
 const Points = 2000;
@@ -31,7 +25,7 @@ const Loyalty = () => {
     return (
         <React.Fragment>
             <div className="mt-20 m-4 text-center text-white justify-center">
-                <motion.pre style={text}>{rounded}</motion.pre>
+                <motion.pre className="bg-linear-to-r from-cyan-950 via-cyan-700 to-cyan-950 shadow-cyan-500 p-2 rounded-full shadow-md" style={text}>{rounded}</motion.pre>
             </div>
         </React.Fragment>
     );

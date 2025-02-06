@@ -1,48 +1,193 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import { IconButton, TextField } from "@mui/material"
+import { IconButton, ListItem, TextField, Typography } from "@mui/material"
 import * as motion from "motion/react-client"
 import SearchIcon from '@mui/icons-material/Search';
-import CardMedia from "@mui/material/CardMedia";
 import Rating from '@mui/material/Rating';
 import Stack from '@mui/material/Stack';
 import Button from "@mui/material/Button";
 import { createClient } from "@supabase/supabase-js";
-import Image from 'next/image'
-import Background from "./ad1.png"
+import Slider from '@mui/material/Slider';
+import List from '@mui/material/List';
+import Dialog from '@mui/material/Dialog';
+
+
 
 const supabase = createClient("https://sdsejsyrecrffnjqevfm.supabase.co", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNkc2Vqc3lyZWNyZmZuanFldmZtIiwicm9sZSI6ImFub24iLCJpYXQiOjE2ODg4NTcxOTcsImV4cCI6MjAwNDQzMzE5N30.lQp4_X1_JxGAS3SlmFHgHs8TQs30F35ssfS-0oZOw-k");
 
-
 const ServiceSearchBar = () => {
+    const [open, setOpen] = useState(false);
+
+    const handleFilter = () => {
+        setOpen(true);
+    };
+    const handleClose = () => {
+        setOpen(false);
+    }
+    const [value, setValue] = useState([1, 5]);
+    const [value1, setValue1] = useState([300, 3000]);
+    const [value2, setValue2] = useState([1, 30]);
+
+    const handleChange = (event, newValue) => {
+        setValue(newValue);
+    };
+    const handleChange1 = (event, newValue) => {
+        setValue1(newValue);
+    };
+    const handleChange2 = (event, newValue) => {
+        setValue2(newValue);
+    };
+    const handleApplyFilter = () => {
+        setOpen(false);
+    };
+    const valuetext = (value) => {
+        return `${value}°C`;
+    }
+
     return (
-        <div className="inline-flex mx-auto">
-            <motion.div initial={{ opacity: 0, y: 0 }} animate={{ opacity: 1, y: 20 }} transition={{
-                type: "spring",
-                bounce: 0.02,
-                stiffness: 200,
-                damping: 80,
-                mass: 10,
-                duration: 1,
-                delay: 0.5
-            }} className="rounded-md p-0.5 bg-gray-light">
-                <TextField size="small" fullWidth={true} className="rounded-md" />
-            </motion.div>
-            <motion.div initial={{ opacity: 0, y: 0 }} animate={{ opacity: 1, y: 20 }} transition={{
-                type: "spring",
-                bounce: 0.02,
-                stiffness: 200,
-                damping: 80,
-                mass: 10,
-                duration: 1,
-                delay: 0.5
-            }} className="rounded-full p-0.5 bg-gray-light ml-2">
-                <IconButton className="rounded-full mx-auto my-auto" sx={{ bgcolor: "teal", color: "whitesmoke" }} >
-                    <SearchIcon fontSize="inherit" />
-                </IconButton>
+        <div>
+            <div className="inline-flex mx-auto">
+                <motion.div initial={{ opacity: 0, y: 0 }} animate={{ opacity: 1, y: 20 }} transition={{
+                    type: "spring",
+                    bounce: 0.02,
+                    stiffness: 200,
+                    damping: 80,
+                    mass: 10,
+                    duration: 1,
+                    delay: 0.5
+                }} className="rounded-md p-0.5 bg-gray-light">
+                    <TextField size="small" fullWidth={true} className="rounded-md" />
+                </motion.div>
+                <motion.div
+                    initial={{ opacity: 0, y: 0 }}
+                    animate={{ opacity: 1, y: 20 }}
+                    transition={{
+                        type: "spring",
+                        bounce: 0.02,
+                        stiffness: 200,
+                        damping: 80,
+                        mass: 10,
+                        duration: 1,
+                        delay: 0.5
+                    }} className="rounded-full p-0.5 bg-gray-light ml-2">
+                    <IconButton
+                        className="rounded-full mx-auto my-auto bg-linear-to-r from-cyan-950 to-cyan-950 via-cyan-700 shodow-sm shadow-cyan-400 text-cyan-50">
+                        <SearchIcon fontSize="inherit" />
+                    </IconButton>
+                </motion.div>
+            </div>
+            <motion.div
+                initial={{ opacity: 0, y: 0 }}
+                animate={{ opacity: 1, y: 20 }}
+                transition={{
+                    type: "spring",
+                    bounce: 0.02,
+                    stiffness: 200,
+                    damping: 80,
+                    mass: 10,
+                    duration: 1,
+                    delay: 0.5
+                }} className="flex align-center justify-center">
+                <Button
+                    variant="outlined"
+                    className="bg-linear-to-r from-cyan-950 to-cyan-950 via-cyan-600 shadow-cyan-400 text-cyan-100 mt-2"
+                    onClick={handleFilter} >
+                    Filter
+                </Button>
+                <Dialog onClose={handleClose} open={open}>
+                    <div className="bg-linear-to-r from-cyan-950 to-cyan-950 via-cyan-600 shadow-cyan-400">
+                        <List className="text-center text-cyan-100 justify-center p-10">
+                            <ListItem sx={{ minWidth: "200pt" }}>
+                                <Typography className="text-cyan-100 whitespace-nowrap">Rating </Typography>
+                                <Slider
+                                    className="text-cyan-300 ml-4"
+                                    getAriaLabel={() => 'Temperature range'}
+                                    value={value}
+                                    onChange={handleChange}
+                                    valueLabelDisplay="auto"
+                                    getAriaValueText={valuetext}
+                                    max={5}
+                                    min={1}
+                                />
+                            </ListItem>
+                            <ListItem sx={{ minWidth: "200pt" }}>
+                                <Typography className="text-cyan-100 whitespace-nowrap">Price Range </Typography>
+                                <Slider
+                                    className="text-cyan-300 ml-4"
+                                    getAriaLabel={() => 'Temperature range'}
+                                    value={value1}
+                                    onChange={handleChange1}
+                                    valueLabelDisplay="auto"
+                                    getAriaValueText={valuetext}
+                                    max={3000}
+                                    min={100}
+                                />
+                            </ListItem>
+                            <ListItem sx={{ minWidth: "200pt" }}>
+                                <Typography className="text-cyan-100 whitespace-nowrap">Distance </Typography>
+                                <Slider
+                                    className="text-cyan-300 ml-4"
+                                    value={value2}
+                                    onChange={handleChange2}
+                                    valueLabelDisplay="auto"
+                                    getAriaValueText={() => `${value}Km`}
+                                    max={30}
+                                    min={1}
+                                />
+                            </ListItem>
+                        </List>
+                        <div className="flex align-center justify-center pb-4">
+                            <Button
+                                onClick={handleApplyFilter}
+                                size="small"
+                                className="transform-none bg-gradient-to-r from-cyan-950 to-cyan-950 via-cyan-600 shadow-cyan-950 rounded-full shadow-md">
+                                <div className="text-cyan-100 font-serif p-2">Apply Filter</div>
+                            </Button>
+                        </div>
+                    </div>
+                </Dialog>
             </motion.div>
         </div>
     )
+}
+
+
+const ServiceMap = ({ Data }) => {
+    return (
+        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{
+            type: "spring",
+            bounce: 0.02,
+            stiffness: 200,
+            damping: 80,
+            mass: 10,
+            duration: 1,
+            delay: 1
+        }} className="grid lg:grid-cols-5 grid-flow-row gap-1 mt-10 mx-2">
+            {Data.map((Service) =>
+                <div>
+                    <Stack className="grid grid-flow-row gap-1 p-2 bg-linear-to-r from-cyan-950 to-cyan-950 via-cyan-700 shadow-sm shadow-cyan-600 rounded-3xl bg-fixed bg-repeat">
+                        <div className="inline-flex align-center justify-end">
+                            <Rating
+                                name="simple-controlled"
+                                value={Service.rating}
+                                className="bg-gradient-to-r from-gray-700 to-gray-700 via-cyan-950 rounded-4xl shadow-sm shadow-cyan-700 p-2 ml-3"
+                            />
+                        </div>
+                        <img className="rounded-lg p-1" alt="test" src={`data:image/jpeg;base64,${Service.person_logo}`} />
+                        <div className="text-cyan-100 font-sans text-center justify-center opacity-100 font-bold">Service: {Service.name}</div>
+                        <div className="text-cyan-100 font-serif text-center justify-center opacity-100 font-bold">Category: {Service.category}</div>
+                        <div className="inline-flex text-center justify-center">
+                            <div className="text-cyan-100 font-serif text-center justify-center opacity-100 font-bold">Price: R{Service.price}</div>
+                            <div className="text-cyan-100 font-serif text-center justify-center opacity-100 font-bold">/ {Service.rate_unit}</div>
+                        </div>
+                        <Button className="transform-none bg-gradient-to-r from-gray-700 to-gray-700 via-cyan-950 shadow-cyan-950 rounded-4xl shadow-md">
+                            <div className="text-cyan-100 font-serif p-2">
+                                Book Now
+                            </div>
+                        </Button>
+                    </Stack>
+                </div>)}
+        </motion.div>)
 }
 
 
@@ -71,53 +216,32 @@ const Service = () => {
         <React.Fragment>
             <div className="mt-20">
                 <div className="block align-center justify-center">
-                    <div className="grid md:grid-cols-2 gap-2 p-4">
+                    <div className="grid grid-cols-2 gap-2 p-4">
                         <Button
                             fullWidth={false}
-                            size="small"
+                            size="large"
                             onClick={(e) => handleSectionEnabled(e)}
-                            className="bg-gradient-to-r from-gray-dark to-blue-dark text-gray-light">
+                            className="bg-linear-to-r from-cyan-950 to-cyan-950 via-cyan-600 shadow-cyan-400 text-cyan-100">
                             Search For A Service
                         </Button>
                         <Button
                             fullWidth={false}
-                            size="small"
+                            size="large"
                             onClick={(e) => handleSectionDisabled(e)}
-                            className="bg-gradient-to-r from-gray-dark to-blue-dark text-gray-light">
+                            className="bg-linear-to-r from-cyan-950 to-cyan-950 via-cyan-600 shadow-cyan-400 text-cyan-100">
                             Add a service
                         </Button>
                     </div>
-                    {SectionEnabled ? <>
+                    {SectionEnabled ?
                         <div>
                             <div className="flex align-center justify-center">
                                 <ServiceSearchBar className="flex align-center justify-center" />
                             </div>
-                            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{
-                                type: "spring",
-                                bounce: 0.02,
-                                stiffness: 200,
-                                damping: 80,
-                                mass: 10,
-                                duration: 1,
-                                delay: 1
-                            }} className="grid lg:grid-cols-5 grid-flow-row gap-1 mt-20 mx-2">
-                                {Data.map((Service) =>
-                                    <div>
-                                        <Stack className="grid grid-flow-row gap-1 p-2 bg-blue-dark rounded-3xl bg-fixed bg-repeat">
-                                            <img className="rounded-lg p-1" alt="test" src={`data:image/jpeg;base64,${Service.person_logo}`} />
-                                            <div className="text-gray-light font-serif text-center justify-center opacity-100 font-bold">Service: {Service.name}</div>
-                                            <div className="text-gray-light text-center justify-center font-bold">Category: {Service.category}</div>
-                                            <div className="text-gray-light text-center justify-center font-bold">Rating: {Service.rating}</div>
-                                            <div className="flex align-center justify-center mx-auto" >
-                                                <Rating
-                                                    name="simple-controlled"
-                                                    value={Service.rating}
-                                                />
-                                            </div>
-                                        </Stack>
-                                    </div>)}
-                            </motion.div>
-                        </div></> : <div>Add to service</div>}
+                            <ServiceMap Data={Data} />
+                        </div> :
+                        <div>
+                            Add to service
+                        </div>}
                 </div>
             </div>
         </React.Fragment>
