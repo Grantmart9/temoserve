@@ -25,7 +25,7 @@ const Loyalty = () => {
     return (
         <React.Fragment>
             <div className="mt-20 m-4 text-center text-white justify-center">
-                <motion.pre className="bg-linear-to-r from-cyan-950 via-cyan-700 to-cyan-950 shadow-cyan-500 p-2 rounded-full shadow-md" style={text}>{rounded}</motion.pre>
+                <motion.pre className="bg-linear-to-r from-cyan-950 via-cyan-700 to-cyan-950 shadow-cyan-500 p-2 rounded-full shadow-sm" style={text}>{rounded}</motion.pre>
             </div>
         </React.Fragment>
     );

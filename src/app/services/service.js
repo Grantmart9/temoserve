@@ -46,18 +46,7 @@ const ServiceSearchBar = () => {
 
     return (
         <div>
-            <div className="inline-flex mx-auto">
-                <motion.div initial={{ opacity: 0, y: 0 }} animate={{ opacity: 1, y: 20 }} transition={{
-                    type: "spring",
-                    bounce: 0.02,
-                    stiffness: 200,
-                    damping: 80,
-                    mass: 10,
-                    duration: 1,
-                    delay: 0.5
-                }} className="rounded-md p-0.5 bg-gray-light">
-                    <TextField size="small" fullWidth={true} className="rounded-md" />
-                </motion.div>
+            <div className="md:inline-flex grid-flow-row gap-1">
                 <motion.div
                     initial={{ opacity: 0, y: 0 }}
                     animate={{ opacity: 1, y: 20 }}
@@ -69,84 +58,103 @@ const ServiceSearchBar = () => {
                         mass: 10,
                         duration: 1,
                         delay: 0.5
-                    }} className="rounded-full p-0.5 bg-gray-light ml-2">
-                    <IconButton
-                        className="rounded-full mx-auto my-auto bg-linear-to-r from-cyan-950 to-cyan-950 via-cyan-700 shodow-sm shadow-cyan-400 text-cyan-50">
-                        <SearchIcon fontSize="inherit" />
-                    </IconButton>
+                    }} className="bg-gradient-to-b from-cyan-800 to-cyan-800 via-cyan-700 rounded-lg p-1 text-center justify-center my-auto">
+                    <TextField size="small" fullWidth={true} className="rounded-md text-cyan-100" />
                 </motion.div>
+                <div className="inline-flex">
+                    <motion.div
+                        initial={{ opacity: 0, y: 0 }}
+                        animate={{ opacity: 1, y: 20 }}
+                        transition={{
+                            type: "spring",
+                            bounce: 0.02,
+                            stiffness: 200,
+                            damping: 80,
+                            mass: 10,
+                            duration: 1,
+                            delay: 0.5
+                        }} className="bg-gray-600 shadow-cyan-200 shadow-sm rounded-2xl p-0.5 ml-2 flex align-center justify-center">
+                        <Button
+                            size="small"
+                            variant="outlined"
+                            className="bg-linear-to-r from-cyan-950 to-cyan-950 transform-none rounded-2xl shadow-cyan-300 shadow-xs via-cyan-600 text-cyan-100"
+                            onClick={handleFilter} >
+                            Filter
+                        </Button>
+                    </motion.div>
+                    <motion.div
+                        initial={{ opacity: 0, y: 0 }}
+                        animate={{ opacity: 1, y: 20 }}
+                        transition={{
+                            type: "spring",
+                            bounce: 0.02,
+                            stiffness: 200,
+                            damping: 80,
+                            mass: 10,
+                            duration: 1,
+                            delay: 0.5
+                        }} className="bg-gray-600 shadow-cyan-200 shadow-sm rounded-2xl p-0.5 ml-2 flex align-center justify-center">
+                        <Button
+                            size="small"
+                            variant="outlined"
+                            className="bg-linear-to-r from-cyan-950 to-cyan-950 transform-none rounded-2xl shadow-cyan-300 shadow-xs via-cyan-600 text-cyan-100">
+                            Search
+                        </Button>
+                    </motion.div>
+                </div>
             </div>
-            <motion.div
-                initial={{ opacity: 0, y: 0 }}
-                animate={{ opacity: 1, y: 20 }}
-                transition={{
-                    type: "spring",
-                    bounce: 0.02,
-                    stiffness: 200,
-                    damping: 80,
-                    mass: 10,
-                    duration: 1,
-                    delay: 0.5
-                }} className="flex align-center justify-center">
-                <Button
-                    variant="outlined"
-                    className="bg-linear-to-r from-cyan-950 to-cyan-950 via-cyan-600 shadow-cyan-400 text-cyan-100 mt-2"
-                    onClick={handleFilter} >
-                    Filter
-                </Button>
-                <Dialog onClose={handleClose} open={open}>
-                    <div className="bg-linear-to-r from-cyan-950 to-cyan-950 via-cyan-600 shadow-cyan-400">
-                        <List className="text-center text-cyan-100 justify-center p-10">
-                            <ListItem sx={{ minWidth: "200pt" }}>
-                                <Typography className="text-cyan-100 whitespace-nowrap">Rating </Typography>
-                                <Slider
-                                    className="text-cyan-300 ml-4"
-                                    getAriaLabel={() => 'Temperature range'}
-                                    value={value}
-                                    onChange={handleChange}
-                                    valueLabelDisplay="auto"
-                                    getAriaValueText={valuetext}
-                                    max={5}
-                                    min={1}
-                                />
-                            </ListItem>
-                            <ListItem sx={{ minWidth: "200pt" }}>
-                                <Typography className="text-cyan-100 whitespace-nowrap">Price Range </Typography>
-                                <Slider
-                                    className="text-cyan-300 ml-4"
-                                    getAriaLabel={() => 'Temperature range'}
-                                    value={value1}
-                                    onChange={handleChange1}
-                                    valueLabelDisplay="auto"
-                                    getAriaValueText={valuetext}
-                                    max={3000}
-                                    min={100}
-                                />
-                            </ListItem>
-                            <ListItem sx={{ minWidth: "200pt" }}>
-                                <Typography className="text-cyan-100 whitespace-nowrap">Distance </Typography>
-                                <Slider
-                                    className="text-cyan-300 ml-4"
-                                    value={value2}
-                                    onChange={handleChange2}
-                                    valueLabelDisplay="auto"
-                                    getAriaValueText={() => `${value}Km`}
-                                    max={30}
-                                    min={1}
-                                />
-                            </ListItem>
-                        </List>
-                        <div className="flex align-center justify-center pb-4">
-                            <Button
-                                onClick={handleApplyFilter}
-                                size="small"
-                                className="transform-none bg-gradient-to-r from-cyan-950 to-cyan-950 via-cyan-600 shadow-cyan-950 rounded-full shadow-md">
-                                <div className="text-cyan-100 font-serif p-2">Apply Filter</div>
-                            </Button>
-                        </div>
+            <Dialog onClose={handleClose} open={open}>
+                <div className="bg-linear-to-r from-cyan-950 to-cyan-950 via-cyan-600 shadow-cyan-400">
+                    <List className="text-center text-cyan-100 justify-center p-10">
+                        <ListItem sx={{ minWidth: "200pt" }}>
+                            <Typography className="text-cyan-100 whitespace-nowrap">Rating </Typography>
+                            <Slider
+                                className="text-cyan-300 ml-4"
+                                getAriaLabel={() => 'Temperature range'}
+                                value={value}
+                                onChange={handleChange}
+                                valueLabelDisplay="auto"
+                                getAriaValueText={valuetext}
+                                max={5}
+                                min={1}
+                            />
+                        </ListItem>
+                        <ListItem sx={{ minWidth: "200pt" }}>
+                            <Typography className="text-cyan-100 whitespace-nowrap">Price Range </Typography>
+                            <Slider
+                                className="text-cyan-300 ml-4"
+                                getAriaLabel={() => 'Temperature range'}
+                                value={value1}
+                                onChange={handleChange1}
+                                valueLabelDisplay="auto"
+                                getAriaValueText={valuetext}
+                                max={3000}
+                                min={100}
+                            />
+                        </ListItem>
+                        <ListItem sx={{ minWidth: "200pt" }}>
+                            <Typography className="text-cyan-100 whitespace-nowrap">Distance </Typography>
+                            <Slider
+                                className="text-cyan-300 ml-4"
+                                value={value2}
+                                onChange={handleChange2}
+                                valueLabelDisplay="auto"
+                                getAriaValueText={() => `${value}Km`}
+                                max={30}
+                                min={1}
+                            />
+                        </ListItem>
+                    </List>
+                    <div className="flex align-center justify-center pb-4">
+                        <Button
+                            onClick={handleApplyFilter}
+                            size="small"
+                            className="transform-none bg-gradient-to-r from-cyan-950 to-cyan-950 via-cyan-600 shadow-cyan-950 rounded-full shadow-md">
+                            <div className="text-cyan-100 font-serif p-2">Apply Filter</div>
+                        </Button>
                     </div>
-                </Dialog>
-            </motion.div>
+                </div>
+            </Dialog>
         </div>
     )
 }
@@ -180,11 +188,14 @@ const ServiceMap = ({ Data }) => {
                             <div className="text-cyan-100 font-serif text-center justify-center opacity-100 font-bold">Price: R{Service.price}</div>
                             <div className="text-cyan-100 font-serif text-center justify-center opacity-100 font-bold">/ {Service.rate_unit}</div>
                         </div>
-                        <Button className="transform-none bg-gradient-to-r from-gray-700 to-gray-700 via-cyan-950 shadow-cyan-950 rounded-4xl shadow-md">
-                            <div className="text-cyan-100 font-serif p-2">
-                                Book Now
-                            </div>
-                        </Button>
+                        <div className="bg-gray-400 rounded-4xl p-0.5">
+                            <Button
+                                className="w-full transform-none bg-gradient-to-r from-gray-700 to-gray-700 via-cyan-950 rounded-4xl shadow-md">
+                                <div className="text-cyan-100 font-sans p-1">
+                                    Book Now
+                                </div>
+                            </Button>
+                        </div>
                     </Stack>
                 </div>)}
         </motion.div>)
@@ -222,7 +233,7 @@ const Service = () => {
                             size="large"
                             onClick={(e) => handleSectionEnabled(e)}
                             className="bg-linear-to-r from-cyan-950 to-cyan-950 via-cyan-600 shadow-cyan-400 text-cyan-100">
-                            Search For A Service
+                            Book A Service
                         </Button>
                         <Button
                             fullWidth={false}
