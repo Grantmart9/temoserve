@@ -72,13 +72,13 @@ const ServiceSearchBar = () => {
                     Search
                 </Button>
             </motion.div>
-            <Dialog onClose={handleClose} open={open}>
-                <div className="bg-linear-to-r from-cyan-950 to-cyan-950 via-cyan-600 shadow-cyan-400">
+            <Dialog className="rounded-2xl shadow-2xl shadow-gray-900" onClose={handleClose} open={open}>
+                <div className="bg-linear-to-r from-gray-400 to-gray-400 via-gray-200 shadow-cyan-400">
                     <List className="text-center text-cyan-100 justify-center p-10">
                         <ListItem sx={{ minWidth: "200pt" }}>
-                            <Typography className="text-cyan-100 whitespace-nowrap">Rating </Typography>
+                            <Typography className="text-gray-900 whitespace-nowrap">Rating </Typography>
                             <Slider
-                                className="text-cyan-300 ml-4"
+                                className="text-gray-800 ml-4"
                                 getAriaLabel={() => 'Temperature range'}
                                 value={value}
                                 onChange={handleChange}
@@ -89,9 +89,9 @@ const ServiceSearchBar = () => {
                             />
                         </ListItem>
                         <ListItem sx={{ minWidth: "200pt" }}>
-                            <Typography className="text-cyan-100 whitespace-nowrap">Price Range </Typography>
+                            <Typography className="text-gray-900 whitespace-nowrap">Price Range </Typography>
                             <Slider
-                                className="text-cyan-300 ml-4"
+                                className="text-gray-800 ml-4"
                                 getAriaLabel={() => 'Temperature range'}
                                 value={value1}
                                 onChange={handleChange1}
@@ -102,9 +102,9 @@ const ServiceSearchBar = () => {
                             />
                         </ListItem>
                         <ListItem sx={{ minWidth: "200pt" }}>
-                            <Typography className="text-cyan-100 whitespace-nowrap">Distance </Typography>
+                            <Typography className="text-gray-900 whitespace-nowrap">Distance </Typography>
                             <Slider
-                                className="text-cyan-300 ml-4"
+                                className="text-gray-800 ml-4"
                                 value={value2}
                                 onChange={handleChange2}
                                 valueLabelDisplay="auto"
@@ -118,8 +118,8 @@ const ServiceSearchBar = () => {
                         <Button
                             onClick={handleApplyFilter}
                             size="small"
-                            className="transform-none bg-gradient-to-r from-cyan-950 to-cyan-950 via-cyan-600 shadow-cyan-950 rounded-full shadow-md">
-                            <div className="text-cyan-100 font-serif p-2">Apply Filter</div>
+                            className="transform-none bg-gradient-to-r from-gray-400 to-gray-400 via-gray-100 shadow-cyan-950 rounded-full shadow-md">
+                            <div className="text-gray-700 font-serif p-2">Apply Filter</div>
                         </Button>
                     </div>
                 </div>
