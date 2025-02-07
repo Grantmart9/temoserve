@@ -144,12 +144,12 @@ const ServiceMap = ({ Data }) => {
             }} className="grid lg:grid-cols-5 grid-flow-row gap-2 mt-10 mx-2">
             {Data.map((Service) =>
                 <div>
-                    <Stack className="grid grid-flow-row gap-1 p-2 bg-linear-to-r from-gray-300 to-gray-300 via-gray-100 shadow-sm shadow-gray-800 rounded-3xl bg-fixed bg-repeat">
+                    <Stack className="grid grid-flow-row gap-1 p-2 bg-linear-to-r from-gray-400 to-gray-400 via-gray-200 shadow-sm shadow-gray-800 rounded-3xl bg-fixed bg-repeat">
                         <div className="inline-flex align-center justify-end">
                             <Rating
                                 name="simple-controlled"
                                 value={Service.rating}
-                                className="bg-gradient-to-r from-gray-700 to-gray-700 via-cyan-950 rounded-4xl shadow-sm shadow-cyan-700 p-2 ml-3"
+                                className="bg-gradient-to-r from-gray-400 to-gray-400 via-gray-100 rounded-4xl shadow-sm shadow-gray-700 p-2 ml-3"
                             />
                         </div>
                         <img className="rounded-lg p-1" alt="test" src={`data:image/jpeg;base64,${Service.person_logo}`} />
@@ -160,7 +160,7 @@ const ServiceMap = ({ Data }) => {
                         </div>
                         <div className="bg-gray-400 rounded-4xl p-0.5">
                             <Button
-                                className="w-full transform-none bg-gradient-to-r from-gray-500 to-gray-500 via-gray-300 rounded-4xl shadow-md">
+                                className="w-full transform-none bg-gradient-to-r from-gray-400 to-gray-400 via-gray-100 rounded-4xl shadow-md">
                                 <div className="text-gray-700 font-sans p-1">
                                     Book Now
                                 </div>
@@ -173,16 +173,7 @@ const ServiceMap = ({ Data }) => {
 
 
 const Service = () => {
-    const [value, setValue] = React.useState(2);
-    const [SectionEnabled, setSectionEnabled] = useState(true);
     const [Data, setData] = useState([]);
-
-    const handleSectionEnabled = () => {
-        setSectionEnabled(true)
-    }
-    const handleSectionDisabled = () => {
-        setSectionEnabled(false)
-    }
 
     useEffect(() => {
         getInstruments();
@@ -197,16 +188,15 @@ const Service = () => {
         <React.Fragment>
             <div className="mt-14">
                 <div className="block align-center justify-center">
-                    {SectionEnabled ?
-                        <div>
-                            <div className="flex align-center justify-center">
-                                <ServiceSearchBar className="flex align-center justify-center" />
-                            </div>
-                            <ServiceMap Data={Data} />
-                        </div> :
-                        <div>
-                            Add to service
-                        </div>}
+                    <div>
+                        <div className="flex align-center justify-center">
+                            <ServiceSearchBar className="flex align-center justify-center" />
+                        </div>
+                        <ServiceMap Data={Data} />
+                    </div> :
+                    <div>
+                        Add to service
+                    </div>
                 </div>
             </div>
         </React.Fragment>
