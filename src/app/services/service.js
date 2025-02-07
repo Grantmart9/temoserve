@@ -193,9 +193,6 @@ const Service = () => {
                             <ServiceSearchBar className="flex align-center justify-center" />
                         </div>
                         <ServiceMap Data={Data} />
-                    </div> :
-                    <div>
-                        Add to service
                     </div>
                 </div>
             </div>
