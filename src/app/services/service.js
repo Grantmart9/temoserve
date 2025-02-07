@@ -50,32 +50,27 @@ const ServiceSearchBar = () => {
                 transition={{
                     type: "spring",
                     bounce: 0.02,
-                    stiffness: 200,
+                    stiffness: 300,
                     damping: 80,
                     mass: 10,
                     duration: 1,
-                    delay: 0.5
-                }} className="md:inline-flex grid-flow-row gap-0">
-                <div className="bg-gray-600 shadow-gray-800 shadow-sm rounded-l-2xl flex align-center justify-center">
-                    <Button
-                        size="small"
-                        variant="outlined"
-                        className="bg-linear-to-r from-cyan-950 to-cyan-950 transform-none rounded-l-2xl  shadow-xs via-cyan-600 text-cyan-100"
-                        onClick={handleFilter} >
-                        Filter
-                    </Button>
-                </div>
-                <div className="bg-gradient-to-b from-cyan-800 to-cyan-800 via-cyan-700 p-1 shadow-gray-800 shadow-xs text-center justify-center my-auto">
+                }} className="inline-flex gap-0">
+                <Button
+                    size="small"
+                    variant="text"
+                    className="bg-gradient-to-b from-gray-300 to-gray-300 via-gray-100 shadow-gray-800 shadow-xs  transform-none rounded-l-2xl rounded-r-none text-gray-700"
+                    onClick={handleFilter} >
+                    Filter
+                </Button>
+                <div className="bg-gradient-to-b from-gray-300 to-gray-300 via-gray-100  p-1 shadow-gray-800 shadow-xs text-center justify-center my-auto">
                     <TextField size="small" fullWidth={true} className="rounded-md text-cyan-100" />
                 </div>
-                <div className="bg-gray-600 shadow-gray-800 shadow-sm rounded-r-2xl flex align-center justify-center">
-                    <Button
-                        size="small"
-                        variant="outlined"
-                        className="bg-linear-to-r from-cyan-950 to-cyan-950 transform-none rounded-r-2xl shadow-xs via-cyan-600 text-cyan-100">
-                        Search
-                    </Button>
-                </div>
+                <Button
+                    size="small"
+                    variant="text"
+                    className="bg-gradient-to-b from-gray-300 to-gray-300 shadow-gray-800 shadow-xs  via-gray-100  transform-none rounded-r-2xl rounded-l-none  text-gray-700">
+                    Search
+                </Button>
             </motion.div>
             <Dialog onClose={handleClose} open={open}>
                 <div className="bg-linear-to-r from-cyan-950 to-cyan-950 via-cyan-600 shadow-cyan-400">
@@ -136,18 +131,20 @@ const ServiceSearchBar = () => {
 
 const ServiceMap = ({ Data }) => {
     return (
-        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{
-            type: "spring",
-            bounce: 0.02,
-            stiffness: 200,
-            damping: 80,
-            mass: 10,
-            duration: 1,
-            delay: 1
-        }} className="grid lg:grid-cols-5 grid-flow-row gap-1 mt-10 mx-2">
+        <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{
+                type: "tween",
+                bounce: 0.02,
+                stiffness: 400,
+                damping: 80,
+                mass: 10,
+                duration: 1,
+            }} className="grid lg:grid-cols-5 grid-flow-row gap-2 mt-10 mx-2">
             {Data.map((Service) =>
                 <div>
-                    <Stack className="grid grid-flow-row gap-1 p-2 bg-linear-to-r from-cyan-950 to-cyan-950 via-cyan-700 shadow-sm shadow-cyan-600 rounded-3xl bg-fixed bg-repeat">
+                    <Stack className="grid grid-flow-row gap-1 p-2 bg-linear-to-r from-gray-300 to-gray-300 via-gray-100 shadow-sm shadow-gray-800 rounded-3xl bg-fixed bg-repeat">
                         <div className="inline-flex align-center justify-end">
                             <Rating
                                 name="simple-controlled"
@@ -156,16 +153,15 @@ const ServiceMap = ({ Data }) => {
                             />
                         </div>
                         <img className="rounded-lg p-1" alt="test" src={`data:image/jpeg;base64,${Service.person_logo}`} />
-                        <div className="text-cyan-100 font-sans text-center justify-center opacity-100 font-bold">Service: {Service.name}</div>
-                        <div className="text-cyan-100 font-serif text-center justify-center opacity-100 font-bold">Category: {Service.category}</div>
-                        <div className="inline-flex text-center justify-center">
-                            <div className="text-cyan-100 font-serif text-center justify-center opacity-100 font-bold">Price: R{Service.price}</div>
-                            <div className="text-cyan-100 font-serif text-center justify-center opacity-100 font-bold">/ {Service.rate_unit}</div>
+                        <div className="text-gray-700 text-lg font-serif text-center justify-center opacity-100 font-bold">Service: {Service.name}</div>
+                        <div className="text-gray-700 text-md font-serif text-center justify-center opacity-100 font-bold">Category: {Service.category}</div>
+                        <div className="inline-flex text-center text-md justify-center">
+                            <div className="text-gray-700 font-serif text-2xl text-center justify-center opacity-100 font-bold">Price: R{Service.price}</div>
                         </div>
                         <div className="bg-gray-400 rounded-4xl p-0.5">
                             <Button
-                                className="w-full transform-none bg-gradient-to-r from-gray-700 to-gray-700 via-cyan-950 rounded-4xl shadow-md">
-                                <div className="text-cyan-100 font-sans p-1">
+                                className="w-full transform-none bg-gradient-to-r from-gray-500 to-gray-500 via-gray-300 rounded-4xl shadow-md">
+                                <div className="text-gray-700 font-sans p-1">
                                     Book Now
                                 </div>
                             </Button>
@@ -199,7 +195,7 @@ const Service = () => {
 
     return (
         <React.Fragment>
-            <div className="mt-20">
+            <div className="mt-14">
                 <div className="block align-center justify-center">
                     {SectionEnabled ?
                         <div>
