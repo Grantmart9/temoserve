@@ -22,6 +22,9 @@ import HistoryIcon from '@mui/icons-material/History';
 import LoginIcon from '@mui/icons-material/Login';
 import Divider from '@mui/material/Divider';
 import LogoutIcon from '@mui/icons-material/Logout';
+import Image from "next/image";
+import Logo from "./Icon.svg";
+import Button from "@mui/material/Button";
 
 const MenuIconButton = ({ toggleDrawer }) => {
   return (
@@ -50,19 +53,20 @@ export default function RootLayout({ children }) {
   };
 
   const MenuList = [
-    { "name": 'Home', "path": "/", "icon": <HomeIcon /> },
     { "name": 'Services', "path": "/services", "icon": <VolunteerActivismIcon /> },
     { "name": 'Loyalty Points', "path": "/loyalty", "icon": <CardMembershipIcon /> },
     { "name": 'Tokens', "path": "/tokens", "icon": <QrCodeIcon /> }]
 
   const SubMenuList = [
     { "name": 'Account', "path": "/account", "icon": <AccountBoxIcon /> },
-    { "name": 'History', "path": "/history", "icon": <HistoryIcon /> },
-    { "name": 'Login', "path": "/login", "icon": <LoginIcon /> },
+    { "name": 'Login/Sign Up', "path": "/login", "icon": <LoginIcon /> },
     { "name": 'Logout', "path": "/logout", "icon": <LogoutIcon /> }]
 
   const DrawerList = (
     <Box sx={{ width: 220 }} className="bg-[url(./background.svg)] h-screen" role="presentation" onClick={toggleDrawer(false)}>
+      <Button href="/">
+        <Image className="flex align-center justify-center" src={Logo} alt={""} />
+      </Button>
       <List className="mt-4 mb-3">
         {MenuList.map((text, index) => (
           <ListItem key={text} disablePadding>

@@ -105,9 +105,9 @@
     "typescript": "^5.7.3"
   },
   "scripts": {
-    "dev": "next dev -p 3014",
+    "dev": "next dev -p 3015",
     "build": "next build",
-    "start": "next start -p 3014",
+    "start": "next start -p 3015",
     "lint": "next lint"
   },
   "eslintConfig": {
