@@ -11,8 +11,6 @@ import Slider from '@mui/material/Slider';
 import List from '@mui/material/List';
 import Dialog from '@mui/material/Dialog';
 
-
-
 const supabase = createClient("https://sdsejsyrecrffnjqevfm.supabase.co", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNkc2Vqc3lyZWNyZmZuanFldmZtIiwicm9sZSI6ImFub24iLCJpYXQiOjE2ODg4NTcxOTcsImV4cCI6MjAwNDQzMzE5N30.lQp4_X1_JxGAS3SlmFHgHs8TQs30F35ssfS-0oZOw-k");
 
 const ServiceSearchBar = () => {
@@ -46,63 +44,39 @@ const ServiceSearchBar = () => {
 
     return (
         <div>
-            <div className="md:inline-flex grid-flow-row gap-1">
-                <motion.div
-                    initial={{ opacity: 0, y: 0 }}
-                    animate={{ opacity: 1, y: 20 }}
-                    transition={{
-                        type: "spring",
-                        bounce: 0.02,
-                        stiffness: 200,
-                        damping: 80,
-                        mass: 10,
-                        duration: 1,
-                        delay: 0.5
-                    }} className="bg-gradient-to-b from-cyan-800 to-cyan-800 via-cyan-700 rounded-lg p-1 text-center justify-center my-auto">
-                    <TextField size="small" fullWidth={true} className="rounded-md text-cyan-100" />
-                </motion.div>
-                <div className="inline-flex">
-                    <motion.div
-                        initial={{ opacity: 0, y: 0 }}
-                        animate={{ opacity: 1, y: 20 }}
-                        transition={{
-                            type: "spring",
-                            bounce: 0.02,
-                            stiffness: 200,
-                            damping: 80,
-                            mass: 10,
-                            duration: 1,
-                            delay: 0.5
-                        }} className="bg-gray-600 shadow-cyan-200 shadow-sm rounded-2xl p-0.5 ml-2 flex align-center justify-center">
-                        <Button
-                            size="small"
-                            variant="outlined"
-                            className="bg-linear-to-r from-cyan-950 to-cyan-950 transform-none rounded-2xl shadow-cyan-300 shadow-xs via-cyan-600 text-cyan-100"
-                            onClick={handleFilter} >
-                            Filter
-                        </Button>
-                    </motion.div>
-                    <motion.div
-                        initial={{ opacity: 0, y: 0 }}
-                        animate={{ opacity: 1, y: 20 }}
-                        transition={{
-                            type: "spring",
-                            bounce: 0.02,
-                            stiffness: 200,
-                            damping: 80,
-                            mass: 10,
-                            duration: 1,
-                            delay: 0.5
-                        }} className="bg-gray-600 shadow-cyan-200 shadow-sm rounded-2xl p-0.5 ml-2 flex align-center justify-center">
-                        <Button
-                            size="small"
-                            variant="outlined"
-                            className="bg-linear-to-r from-cyan-950 to-cyan-950 transform-none rounded-2xl shadow-cyan-300 shadow-xs via-cyan-600 text-cyan-100">
-                            Search
-                        </Button>
-                    </motion.div>
+            <motion.div
+                initial={{ opacity: 0, y: 0 }}
+                animate={{ opacity: 1, y: 20 }}
+                transition={{
+                    type: "spring",
+                    bounce: 0.02,
+                    stiffness: 200,
+                    damping: 80,
+                    mass: 10,
+                    duration: 1,
+                    delay: 0.5
+                }} className="md:inline-flex grid-flow-row gap-0">
+                <div className="bg-gray-600 shadow-gray-800 shadow-sm rounded-l-2xl flex align-center justify-center">
+                    <Button
+                        size="small"
+                        variant="outlined"
+                        className="bg-linear-to-r from-cyan-950 to-cyan-950 transform-none rounded-l-2xl  shadow-xs via-cyan-600 text-cyan-100"
+                        onClick={handleFilter} >
+                        Filter
+                    </Button>
                 </div>
-            </div>
+                <div className="bg-gradient-to-b from-cyan-800 to-cyan-800 via-cyan-700 p-1 shadow-gray-800 shadow-xs text-center justify-center my-auto">
+                    <TextField size="small" fullWidth={true} className="rounded-md text-cyan-100" />
+                </div>
+                <div className="bg-gray-600 shadow-gray-800 shadow-sm rounded-r-2xl flex align-center justify-center">
+                    <Button
+                        size="small"
+                        variant="outlined"
+                        className="bg-linear-to-r from-cyan-950 to-cyan-950 transform-none rounded-r-2xl shadow-xs via-cyan-600 text-cyan-100">
+                        Search
+                    </Button>
+                </div>
+            </motion.div>
             <Dialog onClose={handleClose} open={open}>
                 <div className="bg-linear-to-r from-cyan-950 to-cyan-950 via-cyan-600 shadow-cyan-400">
                     <List className="text-center text-cyan-100 justify-center p-10">
@@ -227,22 +201,6 @@ const Service = () => {
         <React.Fragment>
             <div className="mt-20">
                 <div className="block align-center justify-center">
-                    <div className="grid grid-cols-2 gap-2 p-4">
-                        <Button
-                            fullWidth={false}
-                            size="large"
-                            onClick={(e) => handleSectionEnabled(e)}
-                            className="bg-linear-to-r from-cyan-950 to-cyan-950 via-cyan-600 shadow-cyan-400 text-cyan-100">
-                            Book A Service
-                        </Button>
-                        <Button
-                            fullWidth={false}
-                            size="large"
-                            onClick={(e) => handleSectionDisabled(e)}
-                            className="bg-linear-to-r from-cyan-950 to-cyan-950 via-cyan-600 shadow-cyan-400 text-cyan-100">
-                            Add a service
-                        </Button>
-                    </div>
                     {SectionEnabled ?
                         <div>
                             <div className="flex align-center justify-center">

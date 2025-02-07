@@ -26,6 +26,7 @@ import Image from "next/image";
 import Logo from "./Icon.svg";
 import Button from "@mui/material/Button";
 
+
 const MenuIconButton = ({ toggleDrawer }) => {
   return (
     <IconButton size="large"
@@ -53,9 +54,24 @@ export default function RootLayout({ children }) {
   };
 
   const MenuList = [
-    { "name": 'Services', "path": "/services", "icon": <VolunteerActivismIcon /> },
-    { "name": 'Loyalty Points', "path": "/loyalty", "icon": <CardMembershipIcon /> },
-    { "name": 'Tokens', "path": "/tokens", "icon": <QrCodeIcon /> }]
+    {
+      "name": 'Services', "path": "/services", "icon": <VolunteerActivismIcon />,
+      "submenu":
+        [{ "name": 'My Services', "path": "/my-services" },
+        { "name": 'Rent A Service', "path": "/rent-a-service" }]
+    },
+    {
+      "name": 'Loyalty Points', "path": "/loyalty", "icon": <CardMembershipIcon />,
+      "submenu": []
+    },
+    {
+      "name": 'Tokens', "path": "/tokens", "icon": <QrCodeIcon />,
+      "submenu":
+        [{ "name": 'My tokens', "path": "/my-tokens" },
+        { "name": 'Token History', "path": "/token-history" },
+        { "name": 'Scan Token', "path": "/scan-token" },
+        ]
+    }]
 
   const SubMenuList = [
     { "name": 'Account', "path": "/account", "icon": <AccountBoxIcon /> },
@@ -68,26 +84,31 @@ export default function RootLayout({ children }) {
         <Image className="flex align-center justify-center" src={Logo} alt={""} />
       </Button>
       <List className="mt-4 mb-3">
-        {MenuList.map((text, index) => (
-          <ListItem key={text} disablePadding>
-            <ListItemButton href={text.path}>
+        {MenuList.map((menuItem, index) => (
+          <ListItem className="grid grid-flow-row gap-0" key={index} disablePadding>
+            <ListItemButton href={menuItem.path}>
               <ListItemIcon className="text-gray-light">
-                {text.icon}
+                {menuItem.icon}
               </ListItemIcon>
-              <ListItemText className="text-gray-light" primary={text.name} />
+              <ListItemText className="text-gray-light" primary={menuItem.name} />
             </ListItemButton>
+            <List className="grid grid-flow-row gap-0">
+              {menuItem.submenu.map((submenubutton, index) =>
+                <ListItemButton key={index} href={submenubutton.path}>- {submenubutton.name}</ListItemButton>
+              )}
+            </List>
           </ListItem>
         ))}
       </List>
       <Divider />
       <List className="mt-10">
-        {SubMenuList.map((text, index) => (
-          <ListItem key={text} disablePadding>
-            <ListItemButton href={text.path}>
+        {SubMenuList.map((menuItem, index) => (
+          <ListItem key={index} disablePadding>
+            <ListItemButton href={menuItem.path}>
               <ListItemIcon className="text-gray">
-                {text.icon}
+                {menuItem.icon}
               </ListItemIcon>
-              <ListItemText className="text-gray" primary={text.name} />
+              <ListItemText className="text-gray" primary={menuItem.name} />
             </ListItemButton>
           </ListItem>
         ))}
