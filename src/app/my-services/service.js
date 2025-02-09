@@ -22,6 +22,7 @@ const ServiceSearchBar = () => {
     const handleClose = () => {
         setOpen(false);
     }
+
     const [value, setValue] = useState([1, 5]);
     const [value1, setValue1] = useState([300, 3000]);
     const [value2, setValue2] = useState([1, 30]);
@@ -48,32 +49,32 @@ const ServiceSearchBar = () => {
                 initial={{ opacity: 0, y: 0 }}
                 animate={{ opacity: 1, y: 20 }}
                 transition={{
-                    type: "spring",
+                    type: "tween",
                     bounce: 0.02,
-                    stiffness: 300,
-                    damping: 80,
+                    stiffness: 200,
+                    damping: 20,
                     mass: 10,
                     duration: 1,
                 }} className="inline-flex gap-0">
                 <Button
                     size="small"
                     variant="text"
-                    className="bg-gradient-to-b from-gray-300 to-gray-300 via-gray-100 shadow-gray-800 shadow-xs  transform-none rounded-l-2xl rounded-r-none text-gray-700"
+                    className="bg-gradient-to-b from-gray-200 to-gray-200 via-gray-100 shadow-gray-800 shadow-xs  transform-none rounded-l-2xl rounded-r-none text-gray-700"
                     onClick={handleFilter} >
                     Filter
                 </Button>
-                <div className="bg-gradient-to-b from-gray-300 to-gray-300 via-gray-100  p-1 shadow-gray-800 shadow-xs text-center justify-center my-auto">
+                <div className="bg-gradient-to-b from-gray-200 to-gray-200 via-gray-100  p-1 shadow-gray-800 shadow-xs text-center justify-center my-auto">
                     <TextField size="small" fullWidth={true} className="rounded-md text-cyan-100" />
                 </div>
                 <Button
                     size="small"
                     variant="text"
-                    className="bg-gradient-to-b from-gray-300 to-gray-300 shadow-gray-800 shadow-xs  via-gray-100  transform-none rounded-r-2xl rounded-l-none  text-gray-700">
+                    className="bg-gradient-to-b from-gray-200 to-gray-200 shadow-gray-800 shadow-xs  via-gray-100  transform-none rounded-r-2xl rounded-l-none  text-gray-700">
                     Search
                 </Button>
             </motion.div>
             <Dialog className="rounded-2xl shadow-2xl shadow-gray-900" onClose={handleClose} open={open}>
-                <div className="bg-linear-to-r from-gray-400 to-gray-400 via-gray-200 shadow-cyan-400">
+                <div className="bg-linear-to-r from-gray-300 to-gray-300 via-gray-200 shadow-cyan-400">
                     <List className="text-center text-cyan-100 justify-center p-10">
                         <ListItem sx={{ minWidth: "200pt" }}>
                             <Typography className="text-gray-900 whitespace-nowrap">Rating </Typography>
@@ -118,7 +119,7 @@ const ServiceSearchBar = () => {
                         <Button
                             onClick={handleApplyFilter}
                             size="small"
-                            className="transform-none bg-gradient-to-r from-gray-400 to-gray-400 via-gray-100 shadow-cyan-950 rounded-full shadow-md">
+                            className="transform-none bg-gradient-to-r from-gray-300 to-gray-300 via-gray-100 shadow-gray-700 rounded-full shadow-md">
                             <div className="text-gray-700 font-serif p-2">Apply Filter</div>
                         </Button>
                     </div>
@@ -138,13 +139,28 @@ const ServiceMap = ({ Data }) => {
                 type: "tween",
                 bounce: 0.02,
                 stiffness: 400,
-                damping: 80,
+                damping: 20,
                 mass: 10,
                 duration: 1,
-            }} className="grid lg:grid-cols-5 grid-flow-row gap-2 mt-10 mx-2">
-            {Data.map((Service) =>
-                <div>
-                    <Stack className="grid grid-flow-row gap-1 p-2 bg-linear-to-r from-gray-400 to-gray-400 via-gray-200 shadow-sm shadow-gray-800 rounded-3xl bg-fixed bg-repeat">
+            }}
+            className="grid lg:grid-cols-5 grid-flow-row gap-2 mt-10 mx-2"
+        >
+            {Data.map((Service, index) => (
+                <motion.div
+                    key={Service.id} // assuming each service has a unique id
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{
+                        delay: index * 0.2, // Add staggered delay based on index
+                        type: "tween",
+                        bounce: 0.02,
+                        stiffness: 400,
+                        damping: 80,
+                        mass: 10,
+                        duration: 1,
+                    }}
+                >
+                    <Stack className="grid grid-flow-row gap-1 p-2 bg-linear-to-r from-gray-400 to-gray-400 via-gray-200 shadow-md shadow-gray-800 rounded-3xl bg-fixed bg-repeat">
                         <div className="inline-flex align-center justify-end">
                             <Rating
                                 name="simple-controlled"
@@ -153,23 +169,32 @@ const ServiceMap = ({ Data }) => {
                             />
                         </div>
                         <img className="rounded-lg p-1" alt="test" src={`data:image/jpeg;base64,${Service.person_logo}`} />
-                        <div className="text-gray-700 text-lg font-serif text-center justify-center opacity-100 font-bold">Service: {Service.name}</div>
-                        <div className="text-gray-700 text-md font-serif text-center justify-center opacity-100 font-bold">Category: {Service.category}</div>
-                        <div className="inline-flex text-center text-md justify-center">
-                            <div className="text-gray-700 font-serif text-2xl text-center justify-center opacity-100 font-bold">Price: R{Service.price}</div>
+                        <div className="text-gray-700 text-lg font-serif text-center justify-center opacity-100 font-bold">
+                            Service: {Service.name}
                         </div>
-                        <div className="bg-gray-400 rounded-4xl p-0.5">
+                        <div className="text-gray-700 text-md font-serif text-center justify-center opacity-100 font-bold">
+                            Category: {Service.category}
+                        </div>
+                        <div className="inline-flex text-center text-md justify-center">
+                            <div className="text-gray-700 font-serif text-2xl justify-center opacity-100 font-bold">
+                                Price: R{Service.price}
+                            </div>
+                        </div>
+                        <div className="bg-gray-400 rounded-4xl shadow-sm shadow-gray-900 p-0.5">
                             <Button
-                                className="w-full transform-none bg-gradient-to-r from-gray-400 to-gray-400 via-gray-100 rounded-4xl shadow-md">
+                                className="w-full transform-none bg-gradient-to-r from-gray-400 to-gray-400 via-gray-100 rounded-4xl shadow-md"
+                            >
                                 <div className="text-gray-700 font-sans p-1">
                                     Book Now
                                 </div>
                             </Button>
                         </div>
                     </Stack>
-                </div>)}
-        </motion.div>)
-}
+                </motion.div>
+            ))}
+        </motion.div>
+    );
+};
 
 
 const Service = () => {
@@ -190,7 +215,7 @@ const Service = () => {
                 <div className="block align-center justify-center">
                     <div>
                         <div className="flex align-center justify-center">
-                            <ServiceSearchBar className="flex align-center justify-center" />
+                            My services
                         </div>
                         <ServiceMap Data={Data} />
                     </div>
