@@ -43,6 +43,7 @@ const MenuIconButton = ({ toggleDrawer }) => {
   )
 }
 
+
 const montserrat = Montserrat({ subsets: ["latin"] });
 
 export default function RootLayout({ children }) {
@@ -55,7 +56,7 @@ export default function RootLayout({ children }) {
 
   const MenuList = [
     {
-      "name": 'Services', "path": "/rent-a-services", "icon": <VolunteerActivismIcon />,
+      "name": 'Services', "path": "/rent-a-service", "icon": <VolunteerActivismIcon />,
       "submenu":
         [{ "name": 'My Services', "path": "/my-services" },
         { "name": 'Rent A Service', "path": "/rent-a-service" }]
@@ -79,22 +80,46 @@ export default function RootLayout({ children }) {
     { "name": 'Logout', "path": "/logout", "icon": <LogoutIcon /> }]
 
   const DrawerList = (
-    <Box sx={{ width: 220 }} className="bg-gradient-to-br from-blue-950 to-cyan-950 via-cyan-800 h-screen" role="presentation" onClick={toggleDrawer(false)}>
+    <Box
+      sx={{ width: 220 }}
+      className="bg-gradient-to-br from-blue-950 to-cyan-950 via-cyan-800 bg-repeat-y"
+      role="presentation"
+      onClick={toggleDrawer(false)}>
       <Button href="/">
         <Image className="flex align-center justify-center" src={Logo} alt={""} />
       </Button>
       <List className="mt-4 mb-3">
         {MenuList.map((menuItem, index) => (
-          <ListItem className="grid grid-flow-row gap-0" key={index} disablePadding>
-            <ListItemButton href={menuItem.path}>
-              <ListItemIcon className="text-cyan-100 font-sans">
+          <ListItem className="grid grid-flow-row gap-0 w-full" key={index} disablePadding>
+            <ListItemButton divider={true}
+              sx={{
+                minWidth: 220,
+                color: "whitesmoke",
+                '&:hover': {
+                  backgroundColor: '#80cae8',
+                  color: '#2c6a8a',
+                }
+              }}
+              href={menuItem.path}>
+              <ListItemIcon className=" font-sans">
                 {menuItem.icon}
               </ListItemIcon>
-              <ListItemText className="text-cyan-100 font-sans" primary={menuItem.name} />
+              <ListItemText className=" font-sans" primary={menuItem.name} />
             </ListItemButton>
             <List className="grid grid-flow-row gap-0">
               {menuItem.submenu.map((submenubutton, index) =>
-                <ListItemButton className="text-cyan-100 font-sans" key={index} href={submenubutton.path}>- {submenubutton.name}</ListItemButton>
+                <ListItemButton sx={{
+                  minWidth: 220,
+                  color: "whitesmoke",
+                  '&:hover': {
+                    backgroundColor: '#80cae8',
+                    color: '#2c6a8a',
+                  }
+                }}
+                  key={index}
+                  href={submenubutton.path}>
+                  <ListItemText className="font-sans" primary={submenubutton.name} />
+                </ListItemButton>
               )}
             </List>
           </ListItem>
@@ -105,10 +130,10 @@ export default function RootLayout({ children }) {
         {SubMenuList.map((menuItem, index) => (
           <ListItem key={index} disablePadding>
             <ListItemButton href={menuItem.path}>
-              <ListItemIcon className="text-cyan-100 font-sans">
+              <ListItemIcon className="text-cyan-50 font-sans">
                 {menuItem.icon}
               </ListItemIcon>
-              <ListItemText className="text-cyan-100 font-sans" primary={menuItem.name} />
+              <ListItemText className="text-cyan-50 font-sans" primary={menuItem.name} />
             </ListItemButton>
           </ListItem>
         ))}
@@ -125,7 +150,13 @@ export default function RootLayout({ children }) {
         <div className="z-50 fixed mt-1 ml-1">
           <MenuIconButton toggleDrawer={toggleDrawer(true)} />
         </div>
-        <Drawer transitionDuration={1000} open={open} onClose={toggleDrawer(false)}>
+        <Drawer
+          transitionDuration={800}
+          disableScrollLock={true}
+          variant="temporary"
+          elevation={20}
+          open={open}
+          onClose={toggleDrawer(false)}>
           {DrawerList}
         </Drawer>
         <ThemeProvider theme={theme}>{children}</ThemeProvider>

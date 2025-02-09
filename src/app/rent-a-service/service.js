@@ -55,7 +55,7 @@ const ServiceSearchBar = () => {
                     damping: 20,
                     mass: 10,
                     duration: 1,
-                }} className="inline-flex gap-0">
+                }} className="inline-flex">
                 <Button
                     size="small"
                     sx={{ textTransform: "none" }}
@@ -146,7 +146,7 @@ const ServiceMap = ({ Data }) => {
                 mass: 10,
                 duration: 1,
             }}
-            className="grid lg:grid-cols-5 grid-flow-row gap-4 mt-20 mx-4"
+            className="grid lg:grid-cols-5 grid-flow-row gap-4 mt-20 mx-4 pb-5"
         >
             {Data.map((Service, index) => (
                 <motion.div
@@ -187,10 +187,10 @@ const ServiceMap = ({ Data }) => {
                             <Button
                                 variant="text"
                                 sx={{ textTransform: "none", maxHeight: "20pt" }}
-                                className="bg-gradient-to-r from-cyan-900 to-cyan-900 via-cyan-700 shadow-sm shadow-gray-800"
+                                className="bg-transparent"
                             >
-                                <div className="text-gray-100 font-serif">
-                                    Book Now
+                                <div className="text-cyan-900 font-serif">
+                                    Read More
                                 </div>
                             </Button>
                         </div>
