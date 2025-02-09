@@ -13,7 +13,7 @@ import Dialog from '@mui/material/Dialog';
 
 const supabase = createClient("https://sdsejsyrecrffnjqevfm.supabase.co", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNkc2Vqc3lyZWNyZmZuanFldmZtIiwicm9sZSI6ImFub24iLCJpYXQiOjE2ODg4NTcxOTcsImV4cCI6MjAwNDQzMzE5N30.lQp4_X1_JxGAS3SlmFHgHs8TQs30F35ssfS-0oZOw-k");
 
-const ServiceSearchBar = () => {
+const AddService = () => {
     const [open, setOpen] = useState(false);
 
     const handleFilter = () => {
@@ -45,34 +45,14 @@ const ServiceSearchBar = () => {
 
     return (
         <div>
-            <motion.div
-                initial={{ opacity: 0, y: 0 }}
-                animate={{ opacity: 1, y: 20 }}
-                transition={{
-                    type: "tween",
-                    bounce: 0.02,
-                    stiffness: 200,
-                    damping: 20,
-                    mass: 10,
-                    duration: 1,
-                }} className="inline-flex gap-0">
-                <Button
-                    size="small"
-                    variant="text"
-                    className="bg-gradient-to-b from-gray-200 to-gray-200 via-gray-100 shadow-gray-800 shadow-xs  transform-none rounded-l-2xl rounded-r-none text-gray-700"
-                    onClick={handleFilter} >
-                    Filter
-                </Button>
-                <div className="bg-gradient-to-b from-gray-200 to-gray-200 via-gray-100  p-1 shadow-gray-800 shadow-xs text-center justify-center my-auto">
-                    <TextField size="small" fullWidth={true} className="rounded-md text-cyan-100" />
-                </div>
-                <Button
-                    size="small"
-                    variant="text"
-                    className="bg-gradient-to-b from-gray-200 to-gray-200 shadow-gray-800 shadow-xs  via-gray-100  transform-none rounded-r-2xl rounded-l-none  text-gray-700">
-                    Search
-                </Button>
-            </motion.div>
+            <Button
+                size="small"
+                variant="text"
+                sx={{ textTransform: "none" }}
+                className="bg-gradient-to-b from-gray-200 to-gray-200 via-gray-100 shadow-gray-800 shadow-xs  transform-none rounded-lg text-gray-700"
+                onClick={handleFilter} >
+                Add a new service
+            </Button>
             <Dialog className="rounded-2xl shadow-2xl shadow-gray-900" onClose={handleClose} open={open}>
                 <div className="bg-linear-to-r from-gray-300 to-gray-300 via-gray-200 shadow-cyan-400">
                     <List className="text-center text-cyan-100 justify-center p-10">
@@ -215,7 +195,7 @@ const Service = () => {
                 <div className="block align-center justify-center">
                     <div>
                         <div className="flex align-center justify-center">
-                            My services
+                            <AddService />
                         </div>
                         <ServiceMap Data={Data} />
                     </div>
