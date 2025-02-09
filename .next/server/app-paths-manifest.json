@@ -1,12 +1,12 @@
 {
   "/_not-found/page": "app/_not-found/page.js",
   "/page": "app/page.js",
-  "/account/page": "app/account/page.js",
   "/login/page": "app/login/page.js",
   "/logout/page": "app/logout/page.js",
+  "/account/page": "app/account/page.js",
   "/history/page": "app/history/page.js",
+  "/rent-a-service/page": "app/rent-a-service/page.js",
   "/loyalty/page": "app/loyalty/page.js",
   "/tokens/page": "app/tokens/page.js",
-  "/rent-a-service/page": "app/rent-a-service/page.js",
   "/my-services/page": "app/my-services/page.js"
 }

@@ -60,7 +60,7 @@ const ServiceSearchBar = () => {
                     size="small"
                     sx={{ textTransform: "none" }}
                     variant="text"
-                    className="bg-gradient-to-b from-gray-200 to-gray-200 via-gray-100 rounded-r-none shadow-gray-800 shadow-xs  transform-none text-gray-700"
+                    className="bg-gradient-to-b from-gray-200 to-gray-200 via-gray-100 rounded-r-none shadow-r-none shadow-gray-800 shadow-xs transform-none text-gray-700"
                     onClick={handleFilter} >
                     Filter
                 </Button>
@@ -71,7 +71,7 @@ const ServiceSearchBar = () => {
                     sx={{ textTransform: "none" }}
                     size="small"
                     variant="text"
-                    className="bg-gradient-to-b from-gray-200 to-gray-200 shadow-gray-800 rounded-l-none shadow-xs  via-gray-100  transform-none text-gray-700">
+                    className="bg-gradient-to-b from-gray-200 to-gray-200 shadow-gray-800 rounded-l-none shadow-l-none shadow-xs  via-gray-100  transform-none text-gray-700">
                     Search
                 </Button>
             </motion.div>
@@ -146,7 +146,7 @@ const ServiceMap = ({ Data }) => {
                 mass: 10,
                 duration: 1,
             }}
-            className="grid lg:grid-cols-5 grid-flow-row gap-4 mt-20 mx-2"
+            className="grid lg:grid-cols-5 grid-flow-row gap-4 mt-20 mx-4"
         >
             {Data.map((Service, index) => (
                 <motion.div
@@ -162,28 +162,34 @@ const ServiceMap = ({ Data }) => {
                         mass: 10,
                         duration: 1,
                     }}
+
                 >
-                    <Stack className="grid grid-flow-row gap-1 bg-linear-to-r from-gray-100 to-gray-100 via-gray-300 shadow-md shadow-gray-800">
-                        <img alt="test" src={`data:image/jpeg;base64,${Service.person_logo}`} />
-                        <div className="flex align-center justify-end">
+                    <Stack className="grid grid-flow-row gap-1 bg-linear-to-r from-gray-100 to-gray-100 via-gray-300 shadow-md shadow-gray-800 h-full">
+                        <div>
+                            <img alt="test" style={{ maxHeight: "150pt", width: "100%" }} src={`data:image/jpeg;base64,${Service.person_logo}`} />
+                            <div className="w-full h-1 bg-linear-to-r from-cyan-950 to-cyan-950 via-cyan-600"></div>
+                        </div>
+                        <div className="flex justify-end mr-2">
                             <Rating
                                 name="simple-controlled"
                                 value={Service.rating}
                                 className="p-1"
                             />
                         </div>
-                        <div className="text-gray-700 text-2xl font-serif text-left justify-center font-bold ml-5">
-                            {Service.category.toUpperCase()}
+                        <div className="text-gray-700 text-2xl font-serif text-left justify-center font-bold">
+                            <div className="ml-5">{Service.service_title.toUpperCase()}</div>
+                            <div className="w-full h-0.5 bg-linear-to-r from-cyan-950 to-cyan-950 via-cyan-600 px-2"></div>
                         </div>
-                        <div className="text-gray-700 text-md font-serif text-left justify-center ml-5">
+                        <div className="text-gray-700 text-md font-serif text-center justify-center p-4">
                             {Service.service_description}
                         </div>
                         <div className="p-4 flex align-center justify-center">
                             <Button
-                                sx={{ textTransform: "none" }}
-                                className="bg-gradient-to-r from-cyan-900 to-cyan-900 via-cyan-700 shadow-md shadow-gray-800"
+                                variant="text"
+                                sx={{ textTransform: "none", maxHeight: "20pt" }}
+                                className="bg-gradient-to-r from-cyan-900 to-cyan-900 via-cyan-700 shadow-sm shadow-gray-800"
                             >
-                                <div className="text-gray-100 font-sans">
+                                <div className="text-gray-100 font-serif">
                                     Book Now
                                 </div>
                             </Button>

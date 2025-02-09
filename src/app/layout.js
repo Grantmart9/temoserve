@@ -55,7 +55,7 @@ export default function RootLayout({ children }) {
 
   const MenuList = [
     {
-      "name": 'Services', "path": "/services", "icon": <VolunteerActivismIcon />,
+      "name": 'Services', "path": "/rent-a-services", "icon": <VolunteerActivismIcon />,
       "submenu":
         [{ "name": 'My Services', "path": "/my-services" },
         { "name": 'Rent A Service', "path": "/rent-a-service" }]
@@ -79,7 +79,7 @@ export default function RootLayout({ children }) {
     { "name": 'Logout', "path": "/logout", "icon": <LogoutIcon /> }]
 
   const DrawerList = (
-    <Box sx={{ width: 220 }} className="bg-[url(./background.svg)] h-screen" role="presentation" onClick={toggleDrawer(false)}>
+    <Box sx={{ width: 220 }} className="bg-gradient-to-br from-blue-950 to-cyan-950 via-cyan-800 h-screen" role="presentation" onClick={toggleDrawer(false)}>
       <Button href="/">
         <Image className="flex align-center justify-center" src={Logo} alt={""} />
       </Button>
@@ -87,14 +87,14 @@ export default function RootLayout({ children }) {
         {MenuList.map((menuItem, index) => (
           <ListItem className="grid grid-flow-row gap-0" key={index} disablePadding>
             <ListItemButton href={menuItem.path}>
-              <ListItemIcon className="text-gray-light">
+              <ListItemIcon className="text-cyan-100 font-sans">
                 {menuItem.icon}
               </ListItemIcon>
-              <ListItemText className="text-gray-light" primary={menuItem.name} />
+              <ListItemText className="text-cyan-100 font-sans" primary={menuItem.name} />
             </ListItemButton>
             <List className="grid grid-flow-row gap-0">
               {menuItem.submenu.map((submenubutton, index) =>
-                <ListItemButton key={index} href={submenubutton.path}>- {submenubutton.name}</ListItemButton>
+                <ListItemButton className="text-cyan-100 font-sans" key={index} href={submenubutton.path}>- {submenubutton.name}</ListItemButton>
               )}
             </List>
           </ListItem>
@@ -105,10 +105,10 @@ export default function RootLayout({ children }) {
         {SubMenuList.map((menuItem, index) => (
           <ListItem key={index} disablePadding>
             <ListItemButton href={menuItem.path}>
-              <ListItemIcon className="text-gray">
+              <ListItemIcon className="text-cyan-100 font-sans">
                 {menuItem.icon}
               </ListItemIcon>
-              <ListItemText className="text-gray" primary={menuItem.name} />
+              <ListItemText className="text-cyan-100 font-sans" primary={menuItem.name} />
             </ListItemButton>
           </ListItem>
         ))}
