@@ -1,1 +1,1 @@
-self.__NEXT_FONT_MANIFEST='{"pages":{},"app":{"/Users/grantmarthinus/Desktop/TemoFolder/temoserve/src/app/layout":["static/media/4f05ba3a6752a328-s.p.woff2"]},"appUsingSizeAdjust":true,"pagesUsingSizeAdjust":false}';
+self.__NEXT_FONT_MANIFEST='{"pages":{},"app":{"/Users/grant/Desktop/temoserve/src/app/layout":["static/media/4f05ba3a6752a328-s.p.woff2"]},"appUsingSizeAdjust":true,"pagesUsingSizeAdjust":false}';

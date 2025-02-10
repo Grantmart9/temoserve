@@ -81,7 +81,7 @@ export default function RootLayout({ children }) {
 
   const DrawerList = (
     <Box
-      sx={{ width: 220 }}
+      sx={{ width: 220,height:"100vh" }}
       className="bg-gradient-to-br from-blue-950 to-cyan-950 via-cyan-800 bg-repeat-y"
       role="presentation"
       onClick={toggleDrawer(false)}>
