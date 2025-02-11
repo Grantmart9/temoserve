@@ -83,6 +83,7 @@
     "react-router-hash-link": "^2.3.1",
     "react-scripts": "5.0.1",
     "react-simple-maps": "^3.0.0",
+    "react-spinners": "^0.15.0",
     "react-time": "^4.3.0",
     "react-time-picker": "^7.0.0",
     "react-transition-group": "^4.4.1",

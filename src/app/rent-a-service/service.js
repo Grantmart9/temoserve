@@ -11,7 +11,7 @@ import Slider from '@mui/material/Slider';
 import List from '@mui/material/List';
 import Dialog from '@mui/material/Dialog';
 import ClearIcon from '@mui/icons-material/Clear';
-import { MutatingDots } from 'react-loader-spinner'
+import { Circles } from 'react-loader-spinner'
 
 const supabase = createClient("https://sdsejsyrecrffnjqevfm.supabase.co", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNkc2Vqc3lyZWNyZmZuanFldmZtIiwicm9sZSI6ImFub24iLCJpYXQiOjE2ODg4NTcxOTcsImV4cCI6MjAwNDQzMzE5N30.lQp4_X1_JxGAS3SlmFHgHs8TQs30F35ssfS-0oZOw-k");
 
@@ -44,7 +44,7 @@ const ServiceSearchBar = ({
                     mass: 10,
                     duration: 1,
                 }}
-                className="inline-flex"
+                className="inline-flex mx-2"
             >
                 <Button
                     size="small"
@@ -162,15 +162,12 @@ const ServiceMap = ({ Data }) => {
                     }}
                 >
                     <Stack className="grid grid-flow-row bg-linear-to-r from-gray-100 to-gray-100 via-gray-300 shadow-md shadow-gray-800 h-full">
-                        <div>
-                            <img
-                                alt="test"
-                                style={{ maxHeight: "150pt", width: "100%" }}
-                                src={`data:image/jpeg;base64,${Service.person_logo}`}
-                            />
-                            <div className="w-full h-1 bg-linear-to-r from-cyan-950 to-cyan-950 via-cyan-600"></div>
-                        </div>
-                        <div className="flex justify-end mr-2">
+                        <img
+                            alt="test"
+                            style={{ maxHeight: "150pt", width: "100%" }}
+                            src={`data:image/jpeg;base64,${Service.person_logo}`}
+                        />
+                        <div className="flex align-center justify-end">
                             <Rating
                                 name="simple-controlled"
                                 value={Service.rating}
@@ -184,7 +181,7 @@ const ServiceMap = ({ Data }) => {
                         <div className="text-gray-700 text-md font-serif text-center justify-center p-4">
                             {Service.service_description}
                         </div>
-                        <div className="inline-flex text-gray-700 text-sm font-serif text-center justify-center p-4">
+                        <div className="flex text-gray-700 text-sm font-serif text-left justify-center p-4">
                             R {Service.price} / {Service.rate_unit}
                         </div>
                         <div className="text-gray-700 text-sm font-serif text-center justify-center p-4">
@@ -312,14 +309,14 @@ const Service = () => {
                         </div>
                         {Data.length === 0 ?
                             <div className="flex align-center justify-center mt-20">
-                                <MutatingDots
-                                    visible={true}
-                                    color="#295a61" ƒ
-                                    secondaryColor="#295a61"
-                                    radius="16.5"
-                                    ariaLabel="mutating-dots-loading"
+                                <Circles
+                                    height="250"
+                                    width="250"
+                                    color="#2e6680"
+                                    ariaLabel="circles-loading"
                                     wrapperStyle={{}}
                                     wrapperClass=""
+                                    visible={true}
                                 />
                             </div>
                             : <ServiceMap Data={Data} />

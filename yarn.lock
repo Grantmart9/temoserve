@@ -14929,6 +14929,11 @@ react-simple-maps@^3.0.0:
     d3-zoom "^2.0.0"
     topojson-client "^3.1.0"
 
+react-spinners@^0.15.0:
+  version "0.15.0"
+  resolved "https://registry.yarnpkg.com/react-spinners/-/react-spinners-0.15.0.tgz#bb9536a3839ab4e1513bb98847d79cc1fc930b93"
+  integrity sha512-ZO3/fNB9Qc+kgpG3SfdlMnvTX6LtLmTnOogb3W6sXIaU/kZ1ydEViPfZ06kSOaEsor58C/tzXw2wROGQu3X2pA==
+
 react-stately@^3.35.0:
   version "3.35.0"
   resolved "https://registry.yarnpkg.com/react-stately/-/react-stately-3.35.0.tgz#92bfc83bb4f7626a57c6aeabe4d08aeaab1fa2f7"

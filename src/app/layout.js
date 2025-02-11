@@ -85,8 +85,12 @@ export default function RootLayout({ children }) {
       className="bg-gradient-to-br from-blue-950 to-cyan-950 via-cyan-800 bg-repeat-y"
       role="presentation"
       onClick={toggleDrawer(false)}>
-      <Button href="/">
-        <Image className="flex align-center justify-center" src={Logo} alt={""} />
+      <Button
+        className="flex align-center justify-center"
+        sx={{ textTransform: "none" }} href="/">
+        <div className="rounded-lg bg-gradient-to-b from-cyan-800 to-cyan-800 via-cyan-600 shadow-sm shadow-gray-900 p-1 font-sans text-3xl font-semibold text-center justify-center text-cyan-50 mt-2">
+          TemoServe
+          </div>
       </Button>
       <List className="mt-4 mb-3">
         {MenuList.map((menuItem, index) => (
