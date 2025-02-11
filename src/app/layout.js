@@ -81,7 +81,7 @@ export default function RootLayout({ children }) {
 
   const DrawerList = (
     <Box
-      sx={{ width: 220,height:"100vh" }}
+      sx={{ width: 220, height: "100vh" }}
       className="bg-gradient-to-br from-blue-950 to-cyan-950 via-cyan-800 bg-repeat-y"
       role="presentation"
       onClick={toggleDrawer(false)}>
@@ -146,7 +146,6 @@ export default function RootLayout({ children }) {
       <body
         className={`${montserrat.className} h-full w-full bg-[url(./background.svg)] bg-fixed`}
       >
-        <link href="/dist/styles.css" rel="stylesheet" />
         <div className="z-50 fixed mt-1 ml-1">
           <MenuIconButton toggleDrawer={toggleDrawer(true)} />
         </div>

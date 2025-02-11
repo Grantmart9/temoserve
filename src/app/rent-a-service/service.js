@@ -46,12 +46,12 @@ const ServiceSearchBar = ({
                     size="small"
                     sx={{ textTransform: "none" }}
                     variant="text"
-                    className="bg-gradient-to-b from-gray-200 to-gray-200 via-gray-100 rounded-r-none shadow-r-none shadow-gray-800 shadow-xs transform-none text-gray-700"
+                    className="bg-gradient-to-b from-gray-200 to-gray-200 via-gray-100 rounded-r-none shadow-r-none shadow-gray-800 shadow-xs transform-none text-gray-700 md:w-28"
                     onClick={handleFilter}
                 >
                     Filter
                 </Button>
-                <div className="bg-gradient-to-b from-gray-200 to-gray-200 via-gray-100 p-1 shadow-gray-800 shadow-xs text-center justify-center my-auto">
+                <div className="bg-gradient-to-b from-gray-200 to-gray-200 via-gray-100 p-1 shadow-gray-800 shadow-xs text-center justify-center my-auto md:w-80">
                     <TextField
                         size="small"
                         fullWidth={true}
@@ -61,10 +61,10 @@ const ServiceSearchBar = ({
                     />
                 </div>
                 <Button
-                    sx={{ textTransform: "none" }}
+                    sx={{ textTransform: "none"}}
                     size="small"
                     variant="text"
-                    className="bg-gradient-to-b from-gray-200 to-gray-200 shadow-gray-800 rounded-l-none shadow-l-none shadow-xs via-gray-100 transform-none text-gray-700"
+                    className="bg-gradient-to-b from-gray-200 to-gray-200 shadow-gray-800 rounded-l-none shadow-l-none shadow-xs via-gray-100 transform-none text-gray-700 md:w-28"
                 >
                     Search
                 </Button>
