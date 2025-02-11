@@ -76,6 +76,7 @@
     "react-fusioncharts": "^4.1.0",
     "react-infinite-calendar": "^2.3.1",
     "react-liquid-gauge": "^1.2.4",
+    "react-loader-spinner": "^6.1.6",
     "react-native-maps": "^1.20.1",
     "react-preloaders": "^3.0.3",
     "react-router-dom": "^7.1.5",

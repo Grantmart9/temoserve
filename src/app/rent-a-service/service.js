@@ -10,6 +10,8 @@ import { createClient } from "@supabase/supabase-js";
 import Slider from '@mui/material/Slider';
 import List from '@mui/material/List';
 import Dialog from '@mui/material/Dialog';
+import ClearIcon from '@mui/icons-material/Clear';
+import { MutatingDots } from 'react-loader-spinner'
 
 const supabase = createClient("https://sdsejsyrecrffnjqevfm.supabase.co", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNkc2Vqc3lyZWNyZmZuanFldmZtIiwicm9sZSI6ImFub24iLCJpYXQiOjE2ODg4NTcxOTcsImV4cCI6MjAwNDQzMzE5N30.lQp4_X1_JxGAS3SlmFHgHs8TQs30F35ssfS-0oZOw-k");
 
@@ -26,6 +28,8 @@ const ServiceSearchBar = ({
     value2,
     searchQuery,
     handleSearchChange,
+    handleClearFilter,
+    handleClearSearch
 }) => {
     return (
         <div>
@@ -51,6 +55,14 @@ const ServiceSearchBar = ({
                 >
                     Filter
                 </Button>
+                <Button
+                    size="small"
+                    sx={{ textTransform: "none" }}
+                    variant="text"
+                    onClick={handleClearFilter}
+                    className="bg-gradient-to-b from-gray-200 to-gray-200 via-gray-100 rounded-r-none rounded-l-none shadow-r-none shadow-gray-800 shadow-xs transform-none text-gray-700">
+                    <ClearIcon />
+                </Button>
                 <div className="bg-gradient-to-b from-gray-200 to-gray-200 via-gray-100 p-1 shadow-gray-800 shadow-xs text-center justify-center my-auto md:w-80">
                     <TextField
                         size="small"
@@ -61,12 +73,12 @@ const ServiceSearchBar = ({
                     />
                 </div>
                 <Button
-                    sx={{ textTransform: "none"}}
                     size="small"
+                    sx={{ textTransform: "none" }}
                     variant="text"
-                    className="bg-gradient-to-b from-gray-200 to-gray-200 shadow-gray-800 rounded-l-none shadow-l-none shadow-xs via-gray-100 transform-none text-gray-700 md:w-28"
-                >
-                    Search
+                    onClick={handleClearSearch}
+                    className="bg-gradient-to-b from-gray-200 to-gray-200 via-gray-100 rounded-l-none shadow-r-none shadow-gray-800 shadow-xs transform-none text-gray-700">
+                    <ClearIcon />
                 </Button>
             </motion.div>
             <Dialog className="shadow-gray-900" onClose={handleClose} open={open}>
@@ -132,66 +144,64 @@ const ServiceMap = ({ Data }) => {
             }}
             className="grid lg:grid-cols-5 grid-flow-row gap-4 mt-20 mx-4 pb-5"
         >
-            {/* Check if no data exists */}
-            {Data.length === 0 ? (
-                <Typography
-                    variant="h6"
-                    className="text-center text-gray-900 col-span-full"
+
+
+            {Data.map((Service, index) => (
+                <motion.div
+                    key={Service.id} // assuming each service has a unique id
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{
+                        delay: index * 0.2, // Add staggered delay based on index
+                        type: "tween",
+                        bounce: 0.02,
+                        stiffness: 400,
+                        damping: 80,
+                        mass: 10,
+                        duration: 1,
+                    }}
                 >
-                    No results found.
-                </Typography>
-            ) : (
-                Data.map((Service, index) => (
-                    <motion.div
-                        key={Service.id} // assuming each service has a unique id
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{
-                            delay: index * 0.2, // Add staggered delay based on index
-                            type: "tween",
-                            bounce: 0.02,
-                            stiffness: 400,
-                            damping: 80,
-                            mass: 10,
-                            duration: 1,
-                        }}
-                    >
-                        <Stack className="grid grid-flow-row gap-1 bg-linear-to-r from-gray-100 to-gray-100 via-gray-300 shadow-md shadow-gray-800 h-full">
-                            <div>
-                                <img
-                                    alt="test"
-                                    style={{ maxHeight: "150pt", width: "100%" }}
-                                    src={`data:image/jpeg;base64,${Service.person_logo}`}
-                                />
-                                <div className="w-full h-1 bg-linear-to-r from-cyan-950 to-cyan-950 via-cyan-600"></div>
-                            </div>
-                            <div className="flex justify-end mr-2">
-                                <Rating
-                                    name="simple-controlled"
-                                    value={Service.rating}
-                                    className="p-1"
-                                />
-                            </div>
-                            <div className="text-gray-700 text-2xl font-serif text-left justify-center font-bold">
-                                <div className="ml-5">{Service.service_title.toUpperCase()}</div>
-                                <div className="w-full h-0.5 bg-linear-to-r from-cyan-950 to-cyan-950 via-cyan-600 px-2"></div>
-                            </div>
-                            <div className="text-gray-700 text-md font-serif text-center justify-center p-4">
-                                {Service.service_description}
-                            </div>
-                            <div className="p-4 flex align-center justify-center">
-                                <Button
-                                    variant="text"
-                                    sx={{ textTransform: "none", maxHeight: "20pt" }}
-                                    className="bg-transparent"
-                                >
-                                    <div className="text-cyan-900 font-serif">Read More</div>
-                                </Button>
-                            </div>
-                        </Stack>
-                    </motion.div>
-                ))
-            )}
+                    <Stack className="grid grid-flow-row bg-linear-to-r from-gray-100 to-gray-100 via-gray-300 shadow-md shadow-gray-800 h-full">
+                        <div>
+                            <img
+                                alt="test"
+                                style={{ maxHeight: "150pt", width: "100%" }}
+                                src={`data:image/jpeg;base64,${Service.person_logo}`}
+                            />
+                            <div className="w-full h-1 bg-linear-to-r from-cyan-950 to-cyan-950 via-cyan-600"></div>
+                        </div>
+                        <div className="flex justify-end mr-2">
+                            <Rating
+                                name="simple-controlled"
+                                value={Service.rating}
+                                className="p-1"
+                            />
+                        </div>
+                        <div className="text-gray-700 text-2xl font-serif text-left justify-center font-bold">
+                            <div className="ml-5">{Service.service_title.toUpperCase()}</div>
+                            <div className="w-full h-0.5 bg-linear-to-r from-cyan-950 to-cyan-950 via-cyan-600 px-2"></div>
+                        </div>
+                        <div className="text-gray-700 text-md font-serif text-center justify-center p-4">
+                            {Service.service_description}
+                        </div>
+                        <div className="inline-flex text-gray-700 text-sm font-serif text-center justify-center p-4">
+                            R {Service.price} / {Service.rate_unit}
+                        </div>
+                        <div className="text-gray-700 text-sm font-serif text-center justify-center p-4">
+                            {Service.distance} Km
+                        </div>
+                        <div className="p-4 flex align-center justify-center">
+                            <Button
+                                variant="text"
+                                sx={{ textTransform: "none", maxHeight: "20pt" }}
+                                className="bg-transparent"
+                            >
+                                <div className="text-cyan-900 font-serif">Read More</div>
+                            </Button>
+                        </div>
+                    </Stack>
+                </motion.div>
+            ))}
         </motion.div>
     );
 };
@@ -231,6 +241,17 @@ const Service = () => {
 
     const handleSearchChange = (event) => {
         setSearchQuery(event.target.value);
+    };
+
+    const handleClearSearch = () => {
+        setSearchQuery("")
+
+    };
+
+    const handleClearFilter = () => {
+        setValue([1, 5]);
+        setValue([300, 3000]);
+        setValue([1, 30]);
     };
 
     // Memoized getInstruments function
@@ -284,14 +305,29 @@ const Service = () => {
                                 value2={value2}
                                 searchQuery={searchQuery}
                                 handleSearchChange={handleSearchChange}
+                                handleClearFilter={handleClearFilter}
+                                handleClearSearch={handleClearSearch}
                                 className="flex align-center justify-center mb-2"
                             />
                         </div>
-                        <ServiceMap Data={Data} />
+                        {Data.length === 0 ?
+                            <div className="flex align-center justify-center mt-20">
+                                <MutatingDots
+                                    visible={true}
+                                    color="#295a61" ƒ
+                                    secondaryColor="#295a61"
+                                    radius="16.5"
+                                    ariaLabel="mutating-dots-loading"
+                                    wrapperStyle={{}}
+                                    wrapperClass=""
+                                />
+                            </div>
+                            : <ServiceMap Data={Data} />
+                        }
                     </div>
                 </div>
             </div>
-        </React.Fragment>
+        </React.Fragment >
     );
 };
 
