@@ -207,7 +207,7 @@ const Service = () => {
     const [Data, setData] = useState([]);
     const [open, setOpen] = useState(false);
     const [value, setValue] = useState([1, 5]); // Rating range
-    const [value1, setValue1] = useState([300, 3000]); // Price range
+    const [value1, setValue1] = useState([100, 3000]); // Price range
     const [value2, setValue2] = useState([1, 30]); // Distance range
     const [searchQuery, setSearchQuery] = useState("");
 
