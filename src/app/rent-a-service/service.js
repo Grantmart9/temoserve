@@ -144,8 +144,6 @@ const ServiceMap = ({ Data }) => {
             }}
             className="grid lg:grid-cols-5 grid-flow-row gap-4 mt-20 mx-4 pb-5"
         >
-
-
             {Data.map((Service, index) => (
                 <motion.div
                     key={Service.id} // assuming each service has a unique id
@@ -167,12 +165,19 @@ const ServiceMap = ({ Data }) => {
                             style={{ maxHeight: "150pt", width: "100%" }}
                             src={`data:image/jpeg;base64,${Service.person_logo}`}
                         />
-                        <div className="flex align-center justify-end">
+                        <div className="grid grid-cols-3 gap-1">
                             <Rating
-                                name="simple-controlled"
+                                name="Avg rating"
                                 value={Service.rating}
-                                className="p-1"
+                                size="medium"
+                                sx={{alignItems:"center",justifyItems:"center"}}
                             />
+                            <div className="flex text-gray-700 text-xs font-serif text-center justify-center p-4">
+                                R {Service.price} / {Service.rate_unit}
+                            </div>
+                            <div className="flex text-gray-700 text-xs font-serif text-center justify-center p-4">
+                                {Service.distance} Km
+                            </div>
                         </div>
                         <div className="text-gray-700 text-2xl font-serif text-left justify-center font-bold">
                             <div className="ml-5">{Service.service_title.toUpperCase()}</div>
@@ -180,12 +185,6 @@ const ServiceMap = ({ Data }) => {
                         </div>
                         <div className="text-gray-700 text-md font-serif text-center justify-center p-4">
                             {Service.service_description}
-                        </div>
-                        <div className="flex text-gray-700 text-sm font-serif text-left justify-center p-4">
-                            R {Service.price} / {Service.rate_unit}
-                        </div>
-                        <div className="text-gray-700 text-sm font-serif text-center justify-center p-4">
-                            {Service.distance} Km
                         </div>
                         <div className="p-4 flex align-center justify-center">
                             <Button
@@ -308,10 +307,10 @@ const Service = () => {
                             />
                         </div>
                         {Data.length === 0 ?
-                            <div className="flex align-center justify-center mt-20">
+                            <div className="flex align-center justify-center mt-30">
                                 <Circles
-                                    height="250"
-                                    width="250"
+                                    height="200"
+                                    width="200"
                                     color="#2e6680"
                                     ariaLabel="circles-loading"
                                     wrapperStyle={{}}

@@ -1,14 +1,12 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import { ListItem, TextField, Typography } from "@mui/material"
+import { TextField } from "@mui/material"
 import * as motion from "motion/react-client"
 import Rating from '@mui/material/Rating';
 import Stack from '@mui/material/Stack';
 import Button from "@mui/material/Button";
 import { createClient } from "@supabase/supabase-js";
 import SearchIcon from '@mui/icons-material/Search';
-import Slider from '@mui/material/Slider';
-import List from '@mui/material/List';
 import Dialog from '@mui/material/Dialog';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 
@@ -25,6 +23,37 @@ const ServiceSearchBar = ({ handleFilter,
     value,
     value1,
     value2 }) => {
+
+
+    const AddServiceDialog = () => {
+        const [file, setFile] = useState();
+
+        function handleChange(e) {
+            console.log(e.target.files);
+            setFile(URL.createObjectURL(e.target.files[0]));
+        }
+        return (
+            <Dialog className=" shadow-gray-900" onClose={handleClose} open={open}>
+                <div className="grid grid-flow-row gap-1 bg-linear-to-r from-gray-300 to-gray-300 via-gray-200 shadow-cyan-400 p-2">
+                    <TextField placeholder="Service rate" size="small" />
+                    <TextField placeholder="Rate unit" size="small" />
+                    <TextField placeholder="Service description" size="small" />
+                    <input type="file" onChange={handleChange} />
+                    <div className="flex align-center justify-center">
+                        <img width={150} alt={file} src={file} />
+                    </div>
+                    <div className="flex align-center justify-center pb-4 pt-4">
+                        <Button
+                            sx={{ textTransform: "none" }}
+                            onClick={handleApplyFilter}
+                            size="small"
+                            className="bg-gradient-to-r from-gray-100 to-gray-100 via-gray-300 shadow-gray-700 shadow-md">
+                            <div className="text-gray-700 font-serif">Add service</div>
+                        </Button>
+                    </div>
+                </div>
+            </Dialog>)
+    }
 
     return (
         <div>
@@ -58,59 +87,7 @@ const ServiceSearchBar = ({ handleFilter,
                     <SearchIcon />
                 </Button>
             </motion.div>
-            <Dialog className=" shadow-gray-900" onClose={handleClose} open={open}>
-                <div className="bg-linear-to-r from-gray-300 to-gray-300 via-gray-200 shadow-cyan-400">
-                    <List className="text-center text-cyan-100 justify-center p-10">
-                        <ListItem sx={{ minWidth: "200pt" }}>
-                            <Typography className="text-gray-900 whitespace-nowrap">Rating </Typography>
-                            <Slider
-                                className="text-gray-800 ml-4"
-                                getAriaLabel={() => 'Temperature range'}
-                                value={value}
-                                onChange={handleChange}
-                                valueLabelDisplay="auto"
-                                getAriaValueText={valuetext}
-                                max={5}
-                                min={1}
-                            />
-                        </ListItem>
-                        <ListItem sx={{ minWidth: "200pt" }}>
-                            <Typography className="text-gray-900 whitespace-nowrap">Price Range </Typography>
-                            <Slider
-                                className="text-gray-800 ml-4"
-                                getAriaLabel={() => 'Temperature range'}
-                                value={value1}
-                                onChange={handleChange1}
-                                valueLabelDisplay="auto"
-                                getAriaValueText={valuetext}
-                                max={3000}
-                                min={100}
-                            />
-                        </ListItem>
-                        <ListItem sx={{ minWidth: "200pt" }}>
-                            <Typography className="text-gray-900 whitespace-nowrap">Distance </Typography>
-                            <Slider
-                                className="text-gray-800 ml-4"
-                                value={value2}
-                                onChange={handleChange2}
-                                valueLabelDisplay="auto"
-                                getAriaValueText={() => `${value}Km`}
-                                max={30}
-                                min={1}
-                            />
-                        </ListItem>
-                    </List>
-                    <div className="flex align-center justify-center pb-4">
-                        <Button
-                            sx={{ textTransform: "none" }}
-                            onClick={handleApplyFilter}
-                            size="small"
-                            className=" bg-gradient-to-r from-gray-300 to-gray-300 via-gray-100 shadow-gray-700 shadow-md">
-                            <div className="text-gray-700 font-serif p-2">Apply Filter</div>
-                        </Button>
-                    </div>
-                </div>
-            </Dialog>
+            <AddServiceDialog />
         </div>
     )
 }
