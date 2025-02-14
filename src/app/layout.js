@@ -13,19 +13,18 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import MenuIcon from '@mui/icons-material/Menu';
-import HomeIcon from '@mui/icons-material/Home';
 import VolunteerActivismIcon from '@mui/icons-material/VolunteerActivism';
 import CardMembershipIcon from '@mui/icons-material/CardMembership';
 import QrCodeIcon from '@mui/icons-material/QrCode';
 import AccountBoxIcon from '@mui/icons-material/AccountBox';
-import HistoryIcon from '@mui/icons-material/History';
 import LoginIcon from '@mui/icons-material/Login';
 import Divider from '@mui/material/Divider';
 import LogoutIcon from '@mui/icons-material/Logout';
-import Image from "next/image";
-import Logo from "./Icon.svg";
 import Button from "@mui/material/Button";
+import { createClient } from "@supabase/supabase-js";
+import { SUPABASE_URL, API_KEY } from "./supabase";
 
+const supabase = createClient(SUPABASE_URL, API_KEY);
 
 const MenuIconButton = ({ toggleDrawer }) => {
   return (
@@ -54,6 +53,20 @@ export default function RootLayout({ children }) {
     setOpen(newOpen);
   };
 
+  const handleLogout = async () => {
+    const { error } = await supabase.auth.signOut();
+
+    if (error) {
+      console.error("Error during logout:", error.message);
+    } else {
+      // Optionally, you can also remove the token from localStorage or cookies if needed
+      localStorage.removeItem("access_token");
+      // Redirect the user or update state (e.g., user is logged out)
+      window.location.href = "/login"; // Or use your preferred method to redirect
+    }
+  };
+
+
   const MenuList = [
     {
       "name": 'Services', "path": "/rent-a-service", "icon": <VolunteerActivismIcon />,
@@ -76,8 +89,8 @@ export default function RootLayout({ children }) {
 
   const SubMenuList = [
     { "name": 'Account', "path": "/account", "icon": <AccountBoxIcon /> },
-    { "name": 'Login/Sign Up', "path": "/login", "icon": <LoginIcon /> },
-    { "name": 'Logout', "path": "/logout", "icon": <LogoutIcon /> }]
+    { "name": 'Login / Sign Up', "path": "/login", "icon": <LoginIcon /> },
+  ]
 
   const DrawerList = (
     <Box
@@ -90,7 +103,7 @@ export default function RootLayout({ children }) {
         sx={{ textTransform: "none" }} href="/">
         <div className="rounded-lg bg-gradient-to-b from-cyan-800 to-cyan-800 via-cyan-600 shadow-sm shadow-gray-900 p-1 font-sans text-3xl font-semibold text-center justify-center text-cyan-50 mt-2">
           TemoServe
-          </div>
+        </div>
       </Button>
       <List className="mt-4 mb-3">
         {MenuList.map((menuItem, index) => (
@@ -133,7 +146,15 @@ export default function RootLayout({ children }) {
       <List className="mt-10">
         {SubMenuList.map((menuItem, index) => (
           <ListItem key={index} disablePadding>
-            <ListItemButton href={menuItem.path}>
+            <ListItemButton
+              sx={{
+                minWidth: 220,
+                color: "whitesmoke",
+                '&:hover': {
+                  backgroundColor: '#80cae8',
+                  color: '#2c6a8a',
+                }
+              }} href={menuItem.path}>
               <ListItemIcon className="text-cyan-50 font-sans">
                 {menuItem.icon}
               </ListItemIcon>
@@ -142,6 +163,19 @@ export default function RootLayout({ children }) {
           </ListItem>
         ))}
       </List>
+      <ListItemButton
+        onClick={handleLogout}
+        sx={{
+          minWidth: 220,
+          color: "whitesmoke",
+          '&:hover': {
+            backgroundColor: '#80cae8',
+            color: '#2c6a8a',
+          }
+        }}
+      ><ListItemIcon className="text-cyan-50 font-sans"><LogoutIcon /></ListItemIcon>
+        <ListItemText className="font-sans" primary={"Logout"} />
+      </ListItemButton>
     </Box>
   );
 

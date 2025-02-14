@@ -5,55 +5,81 @@ import * as motion from "motion/react-client"
 import Rating from '@mui/material/Rating';
 import Stack from '@mui/material/Stack';
 import Button from "@mui/material/Button";
+import IconButton from "@mui/material/IconButton";
 import { createClient } from "@supabase/supabase-js";
-import SearchIcon from '@mui/icons-material/Search';
 import Dialog from '@mui/material/Dialog';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
+import FileUploadIcon from '@mui/icons-material/FileUpload';
+import Box from '@mui/material/Box';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
+import { SUPABASE_URL, API_KEY } from "../supabase";
 
-const supabase = createClient("https://sdsejsyrecrffnjqevfm.supabase.co", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNkc2Vqc3lyZWNyZmZuanFldmZtIiwicm9sZSI6ImFub24iLCJpYXQiOjE2ODg4NTcxOTcsImV4cCI6MjAwNDQzMzE5N30.lQp4_X1_JxGAS3SlmFHgHs8TQs30F35ssfS-0oZOw-k");
+const supabase = createClient(SUPABASE_URL, API_KEY);
 
-const ServiceSearchBar = ({ handleFilter,
-    handleClose,
-    handleChange,
-    handleChange1,
-    handleChange2,
-    handleApplyFilter,
-    valuetext,
-    open,
-    value,
-    value1,
-    value2 }) => {
+const AddServiceDialog = ({ handleServiceName, handleServiceRate, handleServiceDescription, handleImage, handleClose, handleAddService, open, image, handleUnit, unit }) => {
 
-
-    const AddServiceDialog = () => {
-        const [file, setFile] = useState();
-
-        function handleChange(e) {
-            console.log(e.target.files);
-            setFile(URL.createObjectURL(e.target.files[0]));
-        }
-        return (
-            <Dialog className=" shadow-gray-900" onClose={handleClose} open={open}>
-                <div className="grid grid-flow-row gap-1 bg-linear-to-r from-gray-300 to-gray-300 via-gray-200 shadow-cyan-400 p-2">
-                    <TextField placeholder="Service rate" size="small" />
-                    <TextField placeholder="Rate unit" size="small" />
-                    <TextField placeholder="Service description" size="small" />
-                    <input type="file" onChange={handleChange} />
-                    <div className="flex align-center justify-center">
-                        <img width={150} alt={file} src={file} />
-                    </div>
-                    <div className="flex align-center justify-center pb-4 pt-4">
-                        <Button
-                            sx={{ textTransform: "none" }}
-                            onClick={handleApplyFilter}
-                            size="small"
-                            className="bg-gradient-to-r from-gray-100 to-gray-100 via-gray-300 shadow-gray-700 shadow-md">
-                            <div className="text-gray-700 font-serif">Add service</div>
-                        </Button>
-                    </div>
+    return (
+        <Dialog className=" shadow-gray-900" onClose={handleClose} open={open}>
+            <div className="grid grid-flow-row gap-1 bg-linear-to-r from-gray-300 to-gray-300 via-gray-200 shadow-cyan-400 p-2">
+                <TextField onChange={handleServiceName} placeholder="Occupation" size="medium" />
+                <div className="inline-flex">
+                    <TextField onChange={handleServiceRate} placeholder="ex R200" prefix="R" size="medium" />
+                    <Box sx={{ minWidth: 120, marginLeft: "5pt" }}>
+                        <FormControl fullWidth>
+                            <InputLabel id="demo-simple-select-label">Unit</InputLabel>
+                            <Select
+                                labelId="demo-simple-select-label"
+                                id="demo-simple-select"
+                                value={unit}
+                                label="Unit"
+                                onChange={handleUnit}
+                            >
+                                <MenuItem value={10}>hr</MenuItem>
+                                <MenuItem value={20}>day</MenuItem>
+                                <MenuItem value={30}>week</MenuItem>
+                            </Select>
+                        </FormControl>
+                    </Box>
                 </div>
-            </Dialog>)
-    }
+                <TextField onChange={handleServiceDescription} placeholder="Service Description" size="large" />
+                <div className="flex text-center justify-center">Insert Your Logo</div>
+                <Button>
+                    <FileUploadIcon />
+                    <input accept="image/*" type="file" onChange={handleImage} />
+                </Button>
+                <div className="flex align-center justify-center">
+                    <img width={150} alt={image} src={image} />
+                </div>
+                <div className="flex align-center justify-center pb-4 pt-4">
+                    <Button
+                        sx={{ textTransform: "none" }}
+                        onClick={handleAddService}
+                        size="small"
+                        className="bg-gradient-to-r from-gray-100 to-gray-100 via-gray-300 shadow-gray-700 shadow-md">
+                        <div className="text-gray-700 font-serif">Add service</div>
+                    </Button>
+                </div>
+            </div>
+        </Dialog>
+    )
+}
+const ServiceSearchBar = ({
+    handleServiceName,
+    handleServiceRate,
+    handleServiceDescription,
+    file,
+    handleImage,
+    handleClose,
+    handleAddService,
+    open,
+    handleFilter,
+    image,
+    handleUnit,
+    unit
+}) => {
 
     return (
         <div>
@@ -68,26 +94,25 @@ const ServiceSearchBar = ({ handleFilter,
                     mass: 10,
                     duration: 1,
                 }} className="inline-flex">
-                <Button
-                    size="small"
-                    sx={{ textTransform: "none" }}
-                    variant="text"
-                    className="bg-gradient-to-b from-gray-200 to-gray-200 via-gray-100 rounded-r-none shadow-r-none shadow-gray-800 shadow-xs transform-none text-gray-700"
+                <IconButton
+                    size="large"
+                    className="bg-transparent text-gray-700"
                     onClick={handleFilter} >
-                    <AddCircleOutlineIcon />
-                </Button>
-                <div className="bg-gradient-to-b from-gray-200 to-gray-200 via-gray-100  p-1 shadow-gray-800 shadow-xs text-center justify-center my-auto">
-                    <TextField size="small" fullWidth={true} className=" text-cyan-100" />
-                </div>
-                <Button
-                    sx={{ textTransform: "none" }}
-                    size="small"
-                    variant="text"
-                    className="bg-gradient-to-b from-gray-200 to-gray-200 shadow-gray-800 rounded-l-none shadow-l-none shadow-xs  via-gray-100  transform-none text-gray-700">
-                    <SearchIcon />
-                </Button>
+                    <AddCircleOutlineIcon sx={{ fontSize: "50pt" }} />
+                </IconButton>
             </motion.div>
-            <AddServiceDialog />
+            <AddServiceDialog
+                handleServiceName={handleServiceName}
+                handleServiceRate={handleServiceRate}
+                handleServiceDescription={handleServiceDescription}
+                file={file}
+                handleImage={handleImage}
+                handleClose={handleClose}
+                handleAddService={handleAddService}
+                open={open}
+                image={image}
+                handleUnit={handleUnit}
+                unit={unit} />
         </div>
     )
 }
@@ -150,7 +175,16 @@ const ServiceMap = ({ Data }) => {
                                 className="bg-transparent"
                             >
                                 <div className="text-cyan-900 font-serif">
-                                    Read More
+                                    Edit Service
+                                </div>
+                            </Button>
+                            <Button
+                                variant="text"
+                                sx={{ textTransform: "none", maxHeight: "20pt" }}
+                                className="bg-transparent"
+                            >
+                                <div className="text-cyan-900 font-serif">
+                                    Delete Service
                                 </div>
                             </Button>
                         </div>
@@ -163,11 +197,18 @@ const ServiceMap = ({ Data }) => {
 
 
 const Service = () => {
+    const [file, setFile] = useState();
+    const [image, setImage] = useState();
     const [Data, setData] = useState([]);
+    const [ServiceName, setServiceName] = useState("");
+    const [ServiceRate, setServiceRate] = useState("");
+    const [ServiceDescription, setServiceDescription] = useState("");
     const [open, setOpen] = useState(false);
-    const [value, setValue] = useState([1, 5]);
-    const [value1, setValue1] = useState([300, 3000]);
-    const [value2, setValue2] = useState([1, 30]);
+    const [unit, setUnit] = React.useState('');
+
+    const handleUnit = (event) => {
+        setUnit(event.target.value);
+    };
 
     const handleFilter = () => {
         setOpen(true);
@@ -176,34 +217,67 @@ const Service = () => {
         setOpen(false);
     }
 
-    const handleChange = (event, newValue) => {
-        setValue(newValue);
-    };
-    const handleChange1 = (event, newValue) => {
-        setValue1(newValue);
-    };
-    const handleChange2 = (event, newValue) => {
-        setValue2(newValue);
-    };
-    const handleApplyFilter = () => {
-        setOpen(false);
-    };
-    const valuetext = (value) => {
-        return `${value}°C`;
-    }
-
     useEffect(() => {
         getInstruments();
+        async function getInstruments() {
+            const user_id = localStorage.getItem("sb-sdsejsyrecrffnjqevfm-auth-token");
+            console.log(user_id)
+            const { data } = await
+                supabase
+                    .from("nextjs_services")
+                    .select()
+                    .eq("user_id", "591fa541-b66c-4c53-b3b2-c2c2c2927227")
+            setData(data)
+        }
     }, []);
 
-    async function getInstruments() {
+    async function handleAddService() {
         const { data } = await
             supabase
-                .from("nextjs")
-                .select()
-                .like('person_name', 'Grant')
-        setData(data);
+                .from("nextjs_services")
+                .insert({
+                    service_title: ServiceName,
+                    price: ServiceRate,
+                    service_description: ServiceDescription,
+                    person_logo: file,
+                    rate_unit: unit,
+                    distance: 5,
+                    rating: 5,
+                    user_id: 1
+                })
+        setOpen(false);
     }
+
+    function handleImage(e) {
+        const file = e.target.files[0]; // Get the selected file
+        setImage(URL.createObjectURL(e.target.files[0]));
+
+        if (file) {
+            // Create a FileReader to read the file
+            const reader = new FileReader();
+
+            // Set up an event listener for when the file is read
+            reader.onloadend = () => {
+                const base64String = reader.result.split(',')[1]; // Strip off the data URL prefix
+                setFile(base64String)
+                // You can now use base64String to send it to your database
+            };
+            // Read the file as a data URL
+            reader.readAsDataURL(file);
+        }
+    }
+
+    function handleServiceName(e) {
+        setServiceName(e.target.value)
+    }
+
+    function handleServiceRate(e) {
+        setServiceRate(e.target.value)
+    }
+    function handleServiceDescription(e) {
+        setServiceDescription(e.target.value)
+    }
+
 
     return (
         <React.Fragment>
@@ -212,17 +286,18 @@ const Service = () => {
                     <div>
                         <div className="flex align-center justify-center">
                             <ServiceSearchBar
-                                handleFilter={handleFilter}
+                                handleServiceName={handleServiceName}
+                                handleServiceRate={handleServiceRate}
+                                handleServiceDescription={handleServiceDescription}
+                                file={file}
+                                image={image}
+                                handleImage={handleImage}
                                 handleClose={handleClose}
-                                handleChange={handleChange}
-                                handleChange1={handleChange1}
-                                handleChange2={handleChange2}
-                                handleApplyFilter={handleApplyFilter}
-                                valuetext={valuetext}
+                                handleAddService={handleAddService}
                                 open={open}
-                                value={value}
-                                value1={value1}
-                                value2={value2}
+                                handleFilter={handleFilter}
+                                handleUnit={handleUnit}
+                                unit={unit}
                                 className="flex align-center justify-center mb-2" />
                         </div>
                         <ServiceMap Data={Data} />

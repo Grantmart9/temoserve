@@ -92,6 +92,7 @@
     "tailwindcss": "^4.0.3",
     "universal-cookie": "^7.2.2",
     "victory": "^37.3.6",
+    "vite": "^6.1.0",
     "yarn": "^1.22.22"
   },
   "devDependencies": {

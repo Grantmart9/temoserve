@@ -12,8 +12,9 @@ import List from '@mui/material/List';
 import Dialog from '@mui/material/Dialog';
 import ClearIcon from '@mui/icons-material/Clear';
 import { Circles } from 'react-loader-spinner'
+import { SUPABASE_URL, API_KEY } from "../supabase";
 
-const supabase = createClient("https://sdsejsyrecrffnjqevfm.supabase.co", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNkc2Vqc3lyZWNyZmZuanFldmZtIiwicm9sZSI6ImFub24iLCJpYXQiOjE2ODg4NTcxOTcsImV4cCI6MjAwNDQzMzE5N30.lQp4_X1_JxGAS3SlmFHgHs8TQs30F35ssfS-0oZOw-k");
+const supabase = createClient(SUPABASE_URL, API_KEY);
 
 const ServiceSearchBar = ({
     handleFilter,
@@ -94,6 +95,7 @@ const ServiceSearchBar = ({
                                 valueLabelDisplay="auto"
                                 getAriaValueText={valuetext}
                                 max={5}
+                                step={1}
                                 min={1}
                             />
                         </ListItem>
@@ -107,6 +109,7 @@ const ServiceSearchBar = ({
                                 valueLabelDisplay="auto"
                                 getAriaValueText={valuetext}
                                 max={3000}
+                                step={100}
                                 min={100}
                             />
                         </ListItem>
@@ -118,7 +121,8 @@ const ServiceSearchBar = ({
                                 onChange={handleChange2}
                                 valueLabelDisplay="auto"
                                 getAriaValueText={() => `${value2} Km`}
-                                max={30}
+                                max={100}
+                                step={5}
                                 min={1}
                             />
                         </ListItem>
@@ -159,27 +163,23 @@ const ServiceMap = ({ Data }) => {
                         duration: 1,
                     }}
                 >
-                    <Stack className="grid grid-flow-row bg-linear-to-r from-gray-100 to-gray-100 via-gray-300 shadow-md shadow-gray-800 h-full">
+                    <Stack className="block bg-linear-to-r from-gray-100 to-gray-100 via-gray-300 shadow-md shadow-gray-800 h-full">
                         <img
                             alt="test"
                             style={{ maxHeight: "150pt", width: "100%" }}
                             src={`data:image/jpeg;base64,${Service.person_logo}`}
                         />
-                        <div className="grid grid-cols-3 gap-1">
+                        <div className="flex align-center justify-center my-2">
                             <Rating
                                 name="Avg rating"
                                 value={Service.rating}
                                 size="medium"
-                                sx={{alignItems:"center",justifyItems:"center"}}
-                            />
-                            <div className="flex text-gray-700 text-xs font-serif text-center justify-center p-4">
-                                R {Service.price} / {Service.rate_unit}
-                            </div>
-                            <div className="flex text-gray-700 text-xs font-serif text-center justify-center p-4">
-                                {Service.distance} Km
-                            </div>
+                                sx={{ alignItems: "center", justifyItems: "center" }}
+                            /></div>
+                        <div className="flex text-gray-700 text-xs font-serif my-auto justify-center">
+                            R {Service.price} / {Service.rate_unit}
                         </div>
-                        <div className="text-gray-700 text-2xl font-serif text-left justify-center font-bold">
+                        <div className="text-gray-700 text-2xl font-serif text-center justify-center font-bold">
                             <div className="ml-5">{Service.service_title.toUpperCase()}</div>
                             <div className="w-full h-0.5 bg-linear-to-r from-cyan-950 to-cyan-950 via-cyan-600 px-2"></div>
                         </div>
@@ -208,7 +208,7 @@ const Service = () => {
     const [open, setOpen] = useState(false);
     const [value, setValue] = useState([1, 5]); // Rating range
     const [value1, setValue1] = useState([100, 3000]); // Price range
-    const [value2, setValue2] = useState([1, 30]); // Distance range
+    const [value2, setValue2] = useState([1, 100]); // Distance range
     const [searchQuery, setSearchQuery] = useState("");
 
     const handleFilter = () => {
@@ -246,13 +246,13 @@ const Service = () => {
 
     const handleClearFilter = () => {
         setValue([1, 5]);
-        setValue([300, 3000]);
-        setValue([1, 30]);
+        setValue1([100, 3000]);
+        setValue2([1, 100]);
     };
 
     // Memoized getInstruments function
     const getInstruments = useCallback(async () => {
-        let query = supabase.from("nextjs").select();
+        let query = supabase.from("nextjs_services").select();
 
         // Filter by rating
         if (value && value[0] !== undefined && value[1] !== undefined) {
@@ -307,11 +307,11 @@ const Service = () => {
                             />
                         </div>
                         {Data.length === 0 ?
-                            <div className="flex align-center justify-center mt-30">
+                            <div style={{ marginTop: "30vh" }} className="flex align-center justify-center">
                                 <Circles
                                     height="200"
                                     width="200"
-                                    color="#2e6680"
+                                    color="#116d80"
                                     ariaLabel="circles-loading"
                                     wrapperStyle={{}}
                                     wrapperClass=""
