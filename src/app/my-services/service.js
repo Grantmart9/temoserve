@@ -19,7 +19,17 @@ import { SUPABASE_URL, API_KEY } from "../supabase";
 
 const supabase = createClient(SUPABASE_URL, API_KEY);
 
-const AddServiceDialog = ({ handleServiceName, handleServiceRate, handleServiceDescription, handleImage, handleClose, handleAddService, open, image, handleUnit, unit }) => {
+const AddServiceDialog = ({
+    handleServiceName,
+    handleServiceRate,
+    handleServiceDescription,
+    handleImage,
+    handleClose,
+    handleAddService,
+    open,
+    image,
+    handleUnit,
+    unit }) => {
 
     return (
         <Dialog className=" shadow-gray-900" onClose={handleClose} open={open}>
@@ -220,13 +230,13 @@ const Service = () => {
     useEffect(() => {
         getInstruments();
         async function getInstruments() {
-            const user_id = localStorage.getItem("sb-sdsejsyrecrffnjqevfm-auth-token");
-            console.log(user_id)
+            const user_details = JSON.parse(localStorage.getItem("sb-sdsejsyrecrffnjqevfm-auth-token"));
+
             const { data } = await
                 supabase
                     .from("nextjs_services")
                     .select()
-                    .eq("user_id", "591fa541-b66c-4c53-b3b2-c2c2c2927227")
+                    .eq("user_id", user_details.user.id)
             setData(data)
         }
     }, []);

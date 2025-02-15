@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { createClient } from "@supabase/supabase-js";
 import Button from "@mui/material/Button";
 import { TextField, InputAdornment, Box } from "@mui/material";
-import { AccountCircle } from "@mui/icons-material";
+import { AccountCircle, Password } from "@mui/icons-material";
 import { useRouter } from 'next/navigation'; // Change this to `next/navigation` for client-side navigation
 import KeyIcon from '@mui/icons-material/Key';
 import VisibilityIcon from '@mui/icons-material/Visibility';
@@ -110,12 +110,17 @@ const LoginDialog = ({
 
 
 const SignUpDialog = ({
-    handleUsername,
-    handlePassword,
-    showPassword,
-    handleSignIn,
-    open,
-    handleSignUpBack }) => {
+    handleConfirmPassword,
+    handlePasswordEdit,
+    handleEmail,
+    handleLastName,
+    handleFirstName,
+    handleSignUpBack,
+    handleSignUpSubmit,
+    ErrorMessage }) => {
+    console.log(ErrorMessage.name)
+    var Error_name = ErrorMessage.name
+    var Error_description = ErrorMessage.code
     return (
         <motion.div
             initial={{ opacity: 0, y: 0 }}
@@ -135,6 +140,7 @@ const SignUpDialog = ({
                         id="input-with-icon-textfield"
                         label="First Name"
                         size="small"
+                        onChange={handleFirstName}
                         sx={{ borderColor: "116d80" }}
                         variant="standard"
                     />
@@ -142,6 +148,7 @@ const SignUpDialog = ({
                         id="input-with-icon-textfield"
                         label="Last Name"
                         size="small"
+                        onChange={handleLastName}
                         sx={{ borderColor: "116d80" }}
                         variant="standard"
                     />
@@ -149,13 +156,7 @@ const SignUpDialog = ({
                         id="input-with-icon-textfield"
                         label="email"
                         size="small"
-                        sx={{ borderColor: "116d80" }}
-                        variant="standard"
-                    />
-                    <TextField
-                        id="input-with-icon-textfield"
-                        label="Address"
-                        size="small"
+                        onChange={handleEmail}
                         sx={{ borderColor: "116d80" }}
                         variant="standard"
                     />
@@ -163,25 +164,19 @@ const SignUpDialog = ({
                         id="input-with-icon-textfield"
                         label="Password"
                         size="small"
+                        onChange={handlePasswordEdit}
                         sx={{ borderColor: "116d80" }}
                         variant="standard"
                     />
-
                     <TextField
                         id="input-with-icon-textfield"
                         label="Confirm Password"
+                        onChange={handleConfirmPassword}
                         size="small"
                         sx={{ borderColor: "116d80" }}
                         variant="standard"
                     />
-                    <TextField
-                        id="input-with-icon-textfield"
-                        label="Date of birth"
-                        size="small"
-                        type="date"
-                        sx={{ borderColor: "116d80" }}
-                        variant="standard"
-                    />
+                    {ErrorMessage === "" ? null : <div className="text-sm text-cyan-900 font-bold text-center justify-center">{Error_description}</div>}
                     <div className="grid grid-cols-2 gap-1 mt-2">
                         <Button
                             size="small"
@@ -194,7 +189,7 @@ const SignUpDialog = ({
                         <Button
                             size="small"
                             fullWidth={false}
-                            onClick={handleSignUpBack}
+                            onClick={handleSignUpSubmit}
                             sx={{ textTransform: "none", bgcolor: "#116d80", color: "whitesmoke" }}
                         >
                             Sign Up
@@ -210,52 +205,61 @@ const Login = () => {
     const [open, setOpen] = useState(true);
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+    const [SignUpPassword, setSignUpPassword] = useState("");
+    const [ConfirmPassword, setConfirmPassword] = useState("");
+    const [Email, setEmail] = useState("");
+    const [FirstName, setFirstName] = useState("");
+    const [lastName, setLastName] = useState("");
     const [auth, setAuth] = useState(true);
+    const [ErrorMessage, setErrorMessage] = useState("");
 
     const router = useRouter(); // Use useRouter from next/navigation for client-side routing
 
     async function handleSignIn() {
-
         try {
             // Perform sign-in
             const { user, session, error } = await supabase.auth.signInWithPassword({
                 email: username,
                 password: password,
             });
-
             // Check for errors during sign-in
             if (error) {
                 console.error("Error during sign-in:", error.message);
                 return; // Stop execution if there is an error
             }
-
             // If session is present, set the session
             if (session) {
                 supabase.auth.setAuth(session.access_token);
             }
-
-            // If user object is present, store user ID and log it
-            if (user) {
-                // Ensure we're in the client-side context
-                if (typeof window !== 'undefined') {
-                    //Store the user_id in localStorage (only in browser)
-                    localStorage.setItem("user_id", JSON.stringify(user));
-                }
-            } else {
-                console.error("No user object found");
-            }
-
             // Redirect to homepage after successful login
             router.push("/rent-a-service");
-
         } catch (err) {
             console.error("Error during sign-in:", err);
         }
     }
 
+    async function handleSignUpSubmit() {
+        const { data, error } = await supabase.auth.signUp({
+            email: Email,
+            password: SignUpPassword,
+            options: {
+                emailRedirectTo: '/',
+            },
+        })
+        if (error) {
+            setErrorMessage(error)
+        }
+    }
+
+
     const showPassword = () => { setOpen(!open); };
     const handleUsername = (e) => { setUsername(e.target.value); };
     const handlePassword = (e) => { setPassword(e.target.value); };
+    const handlePasswordEdit = (e) => { setSignUpPassword(e.target.value); };
+    const handleConfirmPassword = (e) => { setConfirmPassword(e.target.value); };
+    const handleEmail = (e) => { setEmail(e.target.value); };
+    const handleLastName = (e) => { setLastName(e.target.value); };
+    const handleFirstName = (e) => { setFirstName(e.target.value); };
     const handleSignUp = () => { setAuth(false) }
     const handleSignUpBack = () => { setAuth(true) }
 
@@ -271,12 +275,15 @@ const Login = () => {
                     open={open} />
                 :
                 <SignUpDialog
-                    handleUsername={handleUsername}
-                    handlePassword={handlePassword}
-                    showPassword={showPassword}
-                    handleSignIn={handleSignIn}
+                    handleConfirmPassword={handleConfirmPassword}
+                    handlePasswordEdit={handlePasswordEdit}
+                    handleEmail={handleEmail}
+                    handleLastName={handleLastName}
+                    handleFirstName={handleFirstName}
                     handleSignUpBack={handleSignUpBack}
-                    open={open} />
+                    handleSignUpSubmit={handleSignUpSubmit}
+                    ErrorMessage={ErrorMessage}
+                />
             }
         </React.Fragment>
     );
